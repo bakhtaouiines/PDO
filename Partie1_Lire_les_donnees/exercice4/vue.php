@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>PDO-Exercice 1</title>
+    <title>PDO-Exercice 4</title>
 </head>
 
 <body>
-    <h1 class="text-center">Clients</h1>
+    <h1 class="text-center">Clients fidélisés</h1>
     <div class="container">
         <table class="table table-hover table-bordered">
             <thead class="table-dark">
@@ -23,7 +23,8 @@
             <tbody>
                 <?php
                 // On affiche chaque entrée une à une
-                foreach ($listeClients as $key => $value) {
+                foreach ($listeCardClients as $key => $value) {
+                    
                 ?>
                     <tr>
                         <td><?= $value->nom ?></td>
@@ -34,6 +35,7 @@
                 <?php
                 }
                 ?>
+
             </tbody>
         </table>
     </div>

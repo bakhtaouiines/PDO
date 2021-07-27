@@ -16,12 +16,12 @@ class Clients
         }
     }
 
-    public function getAllClient()
+    public function getCardClient()
     {
         // On récupère tout le contenu de la table clients
-        $sql = $this->pdo->query('SELECT `lastName` as nom, `firstname` as prenom, `birthDate` as dateNaissance, `cardNumber` as carteFidelite FROM clients');
+        $sql = $this->pdo->query('SELECT `lastName` as nom, `firstname` as prenom, `birthDate` as dateNaissance, `cardNumber` as carteFidelite FROM `clients` WHERE `card` = 1');
+
         // On retourne un tableau contenant toutes les lignes du jeu d'enregistrements. Le tableau représente chaque ligne comme soit un tableau de valeurs des colonnes, soit un objet avec des propriétés correspondant à chaque nom de colonne.
         return $sql->fetchAll(PDO::FETCH_OBJ);
-
     }
 }
