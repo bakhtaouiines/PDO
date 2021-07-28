@@ -8,15 +8,16 @@
 </head>
 
 <body>
-    <h1 class="text-center">Types de spectacles</h1>
+<h1 class="text-center fs-3 fw-lighter my-3">Types de spectacles</h1>
     <div class="container mx-auto" style="width: 200px;">
+        
         <ul class="list-group">
-            <li class="list-group-item list-group-item-dark">Types de spectacles</li>
+            <li class="list-group-item list-group-item-success">Types de spectacles</li>
             <?php
             // On affiche chaque entrée une à une
             foreach ($listeShowTypes as $key => $value) {
             ?>
-                <li class="list-group-item list-group-item-action"><?= $value->type ?></li>
+                <li class="list-group-item list-group-item-action" style="background-color: #F8D7DA;"><?= $value->type ?></li>
             <?php
             }
             ?>
