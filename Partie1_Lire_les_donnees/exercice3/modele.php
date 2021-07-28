@@ -9,7 +9,7 @@ class Clients
     {
         try {
             // On se connecte à MySQL
-            $this->pdo = new PDO("mysql:host=localhost;dbname=colyseum;charset=utf8", 'root', '');
+            $this->pdo = new PDO('mysql:host=localhost;dbname=colyseum;charset=utf8', 'root', '');
         } catch (PDOException $Exception) {
             // En cas d'erreur, on affiche un message et on arrête tout
             die('Error : ' . $Exception->getMessage());
