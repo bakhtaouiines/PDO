@@ -83,7 +83,7 @@ class Patients
     // fonction pour supprimer un patient 
     public function deletePatient()
     {
-        $deletePatientQuery = $this->pdo->query(
+        $deletePatientQuery = $this->pdo->prepare(
             'DELETE FROM `patients` WHERE ìd`= :id '
         );
         $deletePatientQuery->bindParam(':id', $this->id, PDO::PARAM_INT);

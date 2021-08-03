@@ -15,38 +15,24 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light sticky-top p-3" style="background-color: #deded5;">
-            <div class="container-fluid mx-auto ">
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <a class="navbar-brand" href="index-controler.php">
+                <img src="../images/logo.png" alt="logo de l'hôpital E2N" width="200" height="80">
+            </a>
+            <a href="index-controler.php">Accueil</a>
+            <a href="../controler/ajout-patient-controler.php">Ajouter un patient</a>
+            <a href="../controler/liste-patients-controler.php">Liste des patients</a>
+            <a href="#">Ajouter un rendez-vous</a>
+            <a href="#">Liste des rendez-vous</a>
+            <a href="#">Ajouter un patient et un rendez-vous</a>
+        </div>
 
-                <a class="navbar-brand" href="index-controler.php">
-                    <img src="../images/logo.png" alt="logo de l'hôpital E2N" width="200" height="80">
-                </a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ">
-                        <li class="nav-item px-5 fw-bolder">
-                            <a class="nav-link active" aria-current="page" href="index-controler.php" style="color: #818963;">Accueil</a>
-                        </li>
-                        <li class="nav-item px-4">
-                            <a class="nav-link" href="../controler/ajout-patient-controler.php" style="color: #818963;">Ajouter un patient</a>
-                        </li>
-                        <li class="nav-item px-4">
-                            <a class="nav-link" href="liste-patients-controler.php" style="color: #818963;">Liste des patients</a>
-                        </li>
-                        <li class="nav-item px-4">
-                            <a class="nav-link" href="#" style="color: #818963;">Ajouter un rendez-vous</a>
-                        </li>
-                        <li class="nav-item px-4">
-                            <a class="nav-link" href="#" style="color: #818963;">Liste des rendez-vous</a>
-                        </li>
-                        <li class="nav-item px-4">
-                            <a class="nav-link" href="#" style="color: #818963;">Ajouter un patient et un rendez-vous</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <div id="main">
+            <button class="openbtn" onclick="openNav()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                </svg>
+            </button>
+        </div>
     </header>
