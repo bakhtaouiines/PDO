@@ -1,6 +1,6 @@
 <?php include('header.php'); ?>
 
-<div class="container my-5 p-5 border bg-light">
+<div class="container my-5 p-5 border bg-light" style="max-width: 800px;">
     <h1 class="fs-4 fw-lighter mb-5">Enregistrer un nouveau patient:</h1>
     <form method="POST" action="" class="row g-3 needs-validation">
         <div class="row">

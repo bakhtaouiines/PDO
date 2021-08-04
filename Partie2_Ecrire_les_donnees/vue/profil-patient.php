@@ -1,6 +1,6 @@
 <?php include('header.php'); ?>
 
-<div class="container p-5">
+<div class="content container p-5">
     <div class="card border border-secondary mb-3 shadow-sm p-3 mb-5 bg-body rounded">
         <div class="card-header">
             <ul class="nav nav-pills card-header-pills">

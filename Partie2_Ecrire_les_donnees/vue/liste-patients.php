@@ -1,9 +1,9 @@
 <?php include('header.php'); ?>
 
-<div class="container-fluid my-4 p-5 table-responsive">
-    <table class="table table-hover table-bordered">
+<div class="content container p-5 " style="width: auto;">
+    <table class="table table-bordered table-responsive">
         <thead class="table-light">
-            <tr class="align-middle">
+            <tr class="align-middle ">
                 <th scope="col" class="text-center">Nom</th>
                 <th scope="col" class="text-center">Prénom</th>
                 <th scope="col" class="text-center">Date de naissance</th>

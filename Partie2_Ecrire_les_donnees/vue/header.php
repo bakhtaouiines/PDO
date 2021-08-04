@@ -15,24 +15,16 @@
 
 <body>
     <header>
-        <div id="mySidebar" class="sidebar">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <div class="sidebar sticky-top">
             <a class="navbar-brand" href="index-controler.php">
-                <img src="../images/logo.png" alt="logo de l'hôpital E2N" width="200" height="80">
+                <img src="../images/logo.png" alt="logo de l'hôpital E2N" width="180" height="180">
             </a>
             <a href="index-controler.php">Accueil</a>
             <a href="../controler/ajout-patient-controler.php">Ajouter un patient</a>
             <a href="../controler/liste-patients-controler.php">Liste des patients</a>
-            <a href="#">Ajouter un rendez-vous</a>
+            <a href="../controler/ajout-rendezvous-controler.php">Ajouter un rendez-vous</a>
             <a href="#">Liste des rendez-vous</a>
             <a href="#">Ajouter un patient et un rendez-vous</a>
         </div>
 
-        <div id="main">
-            <button class="openbtn" onclick="openNav()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-                </svg>
-            </button>
-        </div>
     </header>

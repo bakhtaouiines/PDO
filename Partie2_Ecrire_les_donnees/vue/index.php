@@ -1,6 +1,6 @@
 <?php include('header.php'); ?>
-<div class="container p-5" >
-    <div class="row">
+  
+    <!-- <div class="card mx-auto" style="width: 50rem;">
         <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -17,7 +17,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </div> -->
 
 <?php include('footer.php'); ?>
