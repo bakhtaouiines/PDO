@@ -16,15 +16,29 @@ class Appointments
         }
     }
 
-    // on ajoute un patient
+    // on créé un rdv + on récupère l'id du patient
+    public function makeAppointment()
+    {
+        $makeAppointmentQuery = $this->pdo->prepare(
+            'SELECT `appointments`.`dateHour`, `appointments`.`idPatients`, `patients`.`id`
+FROM `appointments`, `patients`
+WHERE `appointments`.`idPatient` = `patients`.`id`'
+
+        );
+        $makeAppointmentQuery->bindValue('`patients`.`id`', $this->id, PDO::PARAM_INT);
+        $makeAppointmentQuery->execute();
+        // On retourne une ligne depuis un jeu de résultats associé à l'objet 
+        return $makeAppointmentQuery->fetch(PDO::FETCH_OBJ);
+    }
+
+    // on ajoute un rdv
     public function addAppointment()
     {
-        $addPatientQuery = $this->pdo->prepare(
+        $addAppointmentQuery = $this->pdo->prepare(
             'INSERT INTO `appointments` (`dateHour`) 
         VALUES (:dateHour'
         );
-        $addPatientQuery->bindParam(':dateHour', $this->dateHour, PDO::PARAM_STR);
-        $addPatientQuery->execute();
+        $addAppointmentQuery->bindParam(':dateHour', $this->dateHour, PDO::PARAM_STR);
+        $addAppointmentQuery->execute();
     }
-    
 }

@@ -14,17 +14,16 @@
 </head>
 
 <body>
-    <header>
-        <div class="sidebar sticky-top">
-            <a class="navbar-brand" href="index-controler.php">
-                <img src="../images/logo.png" alt="logo de l'hôpital E2N" width="180" height="180">
-            </a>
-            <a href="index-controler.php">Accueil</a>
-            <a href="../controler/ajout-patient-controler.php">Ajouter un patient</a>
-            <a href="../controler/liste-patients-controler.php">Liste des patients</a>
-            <a href="../controler/ajout-rendezvous-controler.php">Ajouter un rendez-vous</a>
-            <a href="#">Liste des rendez-vous</a>
-            <a href="#">Ajouter un patient et un rendez-vous</a>
-        </div>
-
-    </header>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a class="navbar-brand" href="index-controler.php">
+            <img src="../images/logo.png" alt="logo de l'hôpital E2N" width="180" height="180">
+        </a>
+        <a href="index-controler.php">Accueil</a>
+        <a href="../controler/ajout-patient-controler.php">Ajouter un patient</a>
+        <a href="../controler/liste-patients-controler.php">Liste des patients</a>
+        <a href="../controler/ajout-rendezvous-controler.php">Ajouter un rendez-vous</a>
+        <a href="#">Liste des rendez-vous</a>
+        <a href="#">Ajouter un patient et un rendez-vous</a>
+    </div>
+    <button class="openbtn" onclick="openNav()">☰ Menu</button>

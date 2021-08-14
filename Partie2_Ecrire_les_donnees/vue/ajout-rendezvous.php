@@ -11,7 +11,7 @@
                     </button>
                     <?php
                     // On affiche chaque entrée une à une
-                    foreach ($PatientsList as $value) {
+                    foreach ($NewAppointment as $value) {
                     ?>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuPatient">
                             <li><a class="dropdown-item" href="#"><?= $value->id ?></a></li>
