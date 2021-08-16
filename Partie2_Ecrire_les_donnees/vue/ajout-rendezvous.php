@@ -1,33 +1,31 @@
 <?php include('header.php'); ?>
 
 <div class="container my-5 p-5 border bg-light" style="max-width: 600px;">
-    <h1 class="fs-4 fw-lighter mb-5">Choisir un rendez-vous:</h1>
-    <form method="POST" class="row g-3 needs-validation" action="">
+    <h1 class="fs-4 fw-lighter mb-5 text-center">Choisir un rendez-vous:</h1>
+    <form method="POST" action="" class="row g-3 needs-validation">
         <div class="row text-center">
             <div class="col-md-12 mb-5">
-                <select id="patient" name="patient" class="form-select" required>
+                <select id="idPatients" name="idPatients" class="form-select" required>
                     <option selected>
                         Patient:
                     </option>
                     <?php
                     foreach ($getPatientId as $values) {
                     ?>">
-                    <option value="<?= $values->lastname ?>, <?= $values->firstname ?>"><?= $values->lastname ?>, <?= $values->firstname ?></option>
+                    <option><?= $values->lastname ?>, <?= $values->firstname ?></option>
                 <?php
                     }
                 ?>
                 </select>
                 <div>
-                    <p><?= isset($errors['patient']) ? $errors['patient'] : '' ?></p>
+                    <p><?= isset($errors['patientId']) ? $errors['patientId'] : '' ?></p>
                 </div>
             </div>
-            <div class="col-md-6">
-                <label for="appointmentDate">Sélectionner un jour:</label>
-                <input type="date" id="appointmentDate" name="appointmentDate">
-            </div>
-            <div class="col-md-6">
-                <label for="appointmentDate">Sélectionner un horaire:</label>
-                <input type="time" id="appointmentDate" name="appointmentDate">
+
+            <label for="appointmentDate" class="fs-5 fw-lighter mb-3">Sélectionner un jour et un horaire:</label>
+            <input type="datetime-local" id="appointmentDateHour" name="appointmentDateHour">
+            <div>
+                <p class="text-danger"><?= isset($errors['appointmentDateHour']) ? $errors['appointmentDateHour'] : '' ?></p>
             </div>
         </div>
 

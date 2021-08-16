@@ -4,7 +4,7 @@ require('../modele/patients.php');
 
 // affichage du patient sélectionné
 
-// on instancie un nouvel objet patient pour modifier les infos d'un patient
+// on instancie un nouvel objet patient pour modifier ultérieurement les infos d'un patient
 $Patient = new Patients;
 // on y stocke l'ID du patient, que l'on va modifier
 $Patient->id = $_GET['patientId'];

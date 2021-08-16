@@ -15,14 +15,12 @@
         <div class="card-body">
 
             <h4 class="card-title">
-                Patient n°</h5>
+                Patient n°<?= $PatientInfo->id ?></h4>
                 <p class="lead"><?= $PatientInfo->lastname ?>, <?= $PatientInfo->firstname ?></p>
 
                 <p class="card-text">
                 <ul class="list-group">
-                    <li class="list-group-item">Date:</li>
-                    <li class="list-group-item">Heure:</li>
-
+                    <li class="list-item">Date et Heure:<?= date('d-m-Y', strtotime($AppointmentInfo->dateHour)) ?></li>
                 </ul>
                 </p>
                 <div class="row d-flex justify-content-center">
@@ -66,24 +64,16 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group col-6 position-relative">
-                            <label for="updatedDate" class="form-label">Date</label>
-                            <input type="date" class="form-control" id="updatedDate" name="updatedDate" value="">
+                            <label for="updatedDateHour" class="form-label">Date</label>
+                            <input type="datetime-local" class="form-control" id="updatedDateHour" name="updatedDateHour" value="">
                             <div class="invalid-feedback">
-                                <?= isset($errors['updatedDate']) ? $errors['updatedDate'] : '' ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-6 position-relative">
-                            <label for="updatedHour" class="form-label">Heure</label>
-                            <input type="time" class="form-control" id="updatedHour" name="updatedHour" value="">
-                            <div class="invalid-feedback">
-                                <p><?= isset($errors['updatedHour']) ? $errors['updatedHour'] : '' ?></p>
+                                <?= isset($errors['updatedDateHour']) ? $errors['updatedDateHour'] : '' ?>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-between">
-                    <input type="submit" id="updatePatient" class="btn btn-success btn-sm px-3" name="updatePatient" value="Enregistrer les modifications">
+                    <input type="submit" id="updateAppointment" class="btn btn-success btn-sm px-3" name="updateAppointment" value="Enregistrer les modifications">
                     <button type="button" class="btn btn-secondary btn-sm px-3" data-bs-dismiss="modal">Annuler</button>
                 </div>
             </form>

@@ -4,25 +4,30 @@
     <table class="table table-bordered table-responsive">
         <thead class="table-light">
             <tr class="align-middle ">
-                <th scope="col" class="text-center">Date du rendez-vous</th> 
-                <th scope="col" class="text-center">Heure du rendez-vous</th>  
-                <th></th> 
-  
+                <th scope="col" class="text-center">Date et Heure du rendez-vous</th>
+                <th></th>
             </tr>
         </thead>
 
-        <tbody>         
+        <tbody>
+            <?php
+            // On affiche chaque entrée une à une
+            foreach ($AppointmentsList as $value) {
+            ?>
                 <tr class="align-middle">
-                    <td></td>
-                    <td></td>
-                    
-                    <td class="text-center">   
-                        <a href="../controler/rendezvous-controler.php" class="btn btn-primary btn-sm px-3" role="button">
-                            Informations du RDV
+                    <td><?= $value->dateHour ?></td>
+                    <td class="text-center">
+                        <a href="../controler/rendezvous-controler.php?patientId=<?= $value->id ?>" class="btn btn-primary btn-sm px-3" role="button">
+                            Consulter
+                        </a>
+                        <a href="" class="btn btn-danger btn-sm px-3" role="button">
+                            Supprimer
                         </a>
                     </td>
                 </tr>
-           
+            <?php
+            }
+            ?>
         </tbody>
     </table>
     <div class="row">
