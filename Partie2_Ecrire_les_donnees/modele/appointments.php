@@ -2,6 +2,10 @@
 // déclaration de la classe Patients
 class Appointments
 {
+    public $id = '';
+    public $dateHour = '';
+    public $idPatients = '';
+    private $pdo;
 
 
     // pour faire le lien avec la bdd, on appelle la fonction construct et on y instancie un nouvel objet 
@@ -15,30 +19,54 @@ class Appointments
             die('Error : ' . $Exception->getMessage());
         }
     }
-
-    // on créé un rdv + on récupère l'id du patient
-    public function makeAppointment()
+    
+    // on récupère tous les patients 
+    public function getAllPatientById()
     {
-        $makeAppointmentQuery = $this->pdo->prepare(
-            'SELECT `appointments`.`dateHour`, `appointments`.`idPatients`, `patients`.`id`
-FROM `appointments`, `patients`
-WHERE `appointments`.`idPatient` = `patients`.`id`'
-
+        $getAllPatientInfoQuery = $this->pdo->prepare(
+            'SELECT `id`, `lastname`, `firstname` 
+            FROM `patients`'
         );
-        $makeAppointmentQuery->bindValue('`patients`.`id`', $this->id, PDO::PARAM_INT);
-        $makeAppointmentQuery->execute();
+        $getAllPatientInfoQuery->bindParam(':id', $this->id, PDO::PARAM_INT);
+        $getAllPatientInfoQuery->execute();
         // On retourne une ligne depuis un jeu de résultats associé à l'objet 
-        return $makeAppointmentQuery->fetch(PDO::FETCH_OBJ);
+        return $getAllPatientInfoQuery->fetchAll(PDO::FETCH_OBJ);
     }
+
+    // on récupère les informations d'un patient
+    public function getPatientById()
+    {
+        $getPatientInfoQuery = $this->pdo->prepare(
+            'SELECT `id`, `lastname`, `firstname` 
+            FROM `patients`
+            WHERE `id` = :id'
+        );
+        $getPatientInfoQuery->bindParam(':id', $this->id, PDO::PARAM_INT);
+        $getPatientInfoQuery->execute();
+        // On retourne une ligne depuis un jeu de résultats associé à l'objet 
+        return $getPatientInfoQuery->fetch(PDO::FETCH_OBJ);
+    }
+
 
     // on ajoute un rdv
     public function addAppointment()
     {
         $addAppointmentQuery = $this->pdo->prepare(
-            'INSERT INTO `appointments` (`dateHour`) 
-        VALUES (:dateHour'
+            'INSERT INTO `appointments` (`dateHour`, `idPatients`) 
+        VALUES (:dateHour, :idPatients)'
         );
         $addAppointmentQuery->bindParam(':dateHour', $this->dateHour, PDO::PARAM_STR);
+        $addAppointmentQuery->bindParam(':idPatients', $this->idPatients, PDO::PARAM_STR);
         $addAppointmentQuery->execute();
     }
+
+    // on liste les rendez-vous du patient
+    // public function listAppointmentsByPatient()
+    // {
+    //     $listAppointmentsByPatientQuery = $this->pdo->query(
+    //         'SELECT `dateHour`
+    //     FROM `appointments`'
+    //     );
+    //     return $listAppointmentsByPatientQuery->fetch(PDO::FETCH_OBJ);
+    // }
 }

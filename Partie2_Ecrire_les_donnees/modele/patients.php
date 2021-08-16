@@ -42,7 +42,7 @@ class Patients
     {
         // On récupère tout le contenu de la table patients
         $getPatientListQuery = $this->pdo->query(
-            'SELECT `id`, `lastname`, `firstname`, `birthdate`, `phone`, `mail` 
+            'SELECT `id`, `lastname`, `firstname` 
             FROM patients'
         );
         // On retourne un tableau contenant toutes les lignes du jeu d'enregistrements. Le tableau représente chaque ligne comme soit un tableau de valeurs des colonnes, soit un objet avec des propriétés correspondant à chaque nom de colonne.
@@ -58,7 +58,7 @@ class Patients
             FROM `patients`
             WHERE `id` = :id'
         );
-        $getPatientInfoQuery->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $getPatientInfoQuery->bindParam(':id', $this->id, PDO::PARAM_INT);
         $getPatientInfoQuery->execute();
         // On retourne une ligne depuis un jeu de résultats associé à l'objet 
         return $getPatientInfoQuery->fetch(PDO::FETCH_OBJ);
@@ -84,9 +84,9 @@ class Patients
     public function deletePatient()
     {
         $deletePatientQuery = $this->pdo->prepare(
-            'DELETE FROM `patients` WHERE ìd`= :id '
+            'DELETE FROM `patients` WHERE `id`= :id '
         );
-        $deletePatientQuery->bindParam(':id', $this->id, PDO::PARAM_INT);
+        $deletePatientQuery->bindValue(':id', $this->id, PDO::PARAM_INT);
         $deletePatientQuery->execute();
     }
 }

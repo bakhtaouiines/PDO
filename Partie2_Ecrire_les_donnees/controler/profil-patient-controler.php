@@ -4,18 +4,18 @@ require('../modele/patients.php');
 
 // affichage du patient sélectionné
 
-    // on instancie un nouvel objet patient pour modifier les infos d'un patient
-    $Patient = new Patients;
-    // on y stocke l'ID du patient, que l'on va modifier
-    $Patient->id = $_GET['patientId'];
-    // on stocke dans une variable la fonction qui va appeler toutes les informations du patient
-    $PatientInfo = $Patient->getPatientInfo();
+// on instancie un nouvel objet patient pour modifier les infos d'un patient
+$Patient = new Patients;
+// on y stocke l'ID du patient, que l'on va modifier
+$Patient->id = $_GET['patientId'];
+// on stocke dans une variable la fonction qui va appeler toutes les informations du patient
+$PatientInfo = $Patient->getPatientInfo();
 
-    //affichage de la liste des rendez-vous du patient sélectionné
-    // $listAppointmentsPatient = new appointments();
-    // $listAppointmentsPatient->idPatients = $patients->id;
-    // $listInfoAppointments = $listAppointmentsPatient->listAppointmentsByIdPatient();
-    // $patientInfo = $patient->getPatientById();
+// //affichage de la liste des rendez-vous du patient sélectionné   
+// $listAppointmentsPatient = new Appointments();
+// $listAppointmentsPatient->idPatients = $patients->id;
+// $listInfoAppointments = $listAppointmentsPatient->listAppointmentsByPatient();
+// $patientInfo = $patient->getPatientById();
 
 $errors = [];
 // lorsqu'on clique sur le bouton "modifier les informations : 
@@ -91,6 +91,7 @@ if (isset($_POST['deletePatient'])) {
         if ($DeletePatientInfo->deletePatient()) {
             // si tout est ok, on redirige vers la page de la liste des patients
             header('Location: ../controler/liste-patients-controler.php');
+            exit;
         } else {
             // sinon, on affiche un msg d'erreur
             $errors = 'Une erreur est survenue, veuillez réessayer.';

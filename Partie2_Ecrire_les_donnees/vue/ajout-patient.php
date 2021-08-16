@@ -12,7 +12,6 @@
                 </div>
                 <div class="invalid-tooltip">
                     <?= isset($errors['lastname']) ? $errors['lastname'] : '' ?>
-
                 </div>
             </div>
             <div class="col-md-6 position-relative">

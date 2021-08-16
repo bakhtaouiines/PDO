@@ -8,7 +8,7 @@
                     <button type="button" class="nav-link active" href="#">Informations</button>
                 </li>
                 <li class="nav-item">
-                <button type="button" class="nav-link" href="#">Rendez-vous</button>
+                    <button type="button" class="nav-link" href="#">Rendez-vous</button>
                 </li>
             </ul>
         </div>
@@ -16,41 +16,59 @@
 
             <h4 class="card-title">
                 Patient n°<?= $PatientInfo->id ?></h5>
-            <p class="lead"><?= $PatientInfo->lastname ?>, <?= $PatientInfo->firstname ?></p>
+                <p class="lead"><?= $PatientInfo->lastname ?>, <?= $PatientInfo->firstname ?></p>
 
-            <p class="card-text">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Date de naissance: <?= date('d-m-Y', strtotime($PatientInfo->birthdate)) ?></li>
-                <li class="list-group-item">Téléphone: <?= $PatientInfo->phone ?></li>
-                <li class="list-group-item">Email: <?= $PatientInfo->mail ?></li>
-            </ul>
-            </p>
-            <div class="row d-flex justify-content-center">
-                <div class="col-6">
-                    <button type="button" class="btn btn-outline-primary btn-sm p-2" data-bs-toggle="modal" data-bs-target="#modifPatientModal">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                        </svg>
-                        </svg>Modifier les informations
-                    </button>
-                </div>
-                <div class="col-auto">
-                    <form method="POST" action="?patientId=<?= $PatientInfo->id ?>">
-                        <button type="submit" id="deletePatient" name="deletePatient" class="btn btn-outline-danger btn-sm p-2" name="deletePatient">
-                            <svg xmlns=" http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
-                                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-                                <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z" />
+                <p class="card-text">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Date de naissance: <?= date('d-m-Y', strtotime($PatientInfo->birthdate)) ?></li>
+                    <li class="list-group-item">Téléphone: <?= $PatientInfo->phone ?></li>
+                    <li class="list-group-item">Email: <?= $PatientInfo->mail ?></li>
+                </ul>
+                </p>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-outline-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#modifPatientModal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
                             </svg>
-                            </svg>Supprimer le patient
+                            </svg>Modifier les informations
                         </button>
-                    </form>
+                    </div>
+                    <div class="col-auto">
+                        <form method="POST" action="">
+                            <button type="submit" id="deletePatient" name="deletePatient" class="btn btn-outline-danger btn-sm p-2" name="deletePatient">
+                                <svg xmlns=" http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
+                                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                                    <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                                </svg>Supprimer le patient
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            </div>
         </div>
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-primary me-md-2" href="../controler/liste-patients-controler.php">Liste des patients</a>
+    </div>
+
+</div>
+<!-- fenêtre modale pour confirmer la suppression -->
+<div class="modal hide fade" id="confirmModal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Confirmation de la suppression</h3>
+    </div>
+    <div class="modal-body">
+        <p>Etes-vous sûr de vouloir supprimer cet élément ?</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" id="confirmModalNo">Non</a>
+        <a href="#" class="btn btn-primary" id="confirmModalYes">Oui</a>
     </div>
 </div>
 
-</div>
+
 <!-- Modal -->
 <div class="modal fade" id="modifPatientModal" tabindex="-1" aria-labelledby="modifPatientModal" aria-hidden="true">
     <div class="modal-dialog">
