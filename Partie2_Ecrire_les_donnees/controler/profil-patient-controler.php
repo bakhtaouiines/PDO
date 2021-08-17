@@ -2,7 +2,7 @@
 // On charge le fichier du modèle.
 require('../modele/patients.php');
 
-// affichage du patient sélectionné
+/////////////// affichage du patient sélectionné //////////////////
 
 // on instancie un nouvel objet patient pour modifier ultérieurement les infos d'un patient
 $Patient = new Patients;
@@ -11,14 +11,15 @@ $Patient->id = $_GET['patientId'];
 // on stocke dans une variable la fonction qui va appeler toutes les informations du patient
 $PatientInfo = $Patient->getPatientInfo();
 
-// //affichage de la liste des rendez-vous du patient sélectionné   
-// $listAppointmentsPatient = new Appointments();
-// $listAppointmentsPatient->idPatients = $patients->id;
-// $listInfoAppointments = $listAppointmentsPatient->listAppointmentsByPatient();
-// $patientInfo = $patient->getPatientById();
+// instance d'un nouvel objet pour lister les rendezvous du patient sélectionné
+$AppointmentInfo = new Patients;
+$AppointmentInfo->idPatients = $PatientInfo->id;
+$Appointment = $AppointmentInfo->getAppointmentInfo();
 
+
+// tableau où seront stockées les erreurs
 $errors = [];
-// lorsqu'on clique sur le bouton "modifier les informations : 
+// modification des informations du patient: 
 if (isset($_POST['updatePatient'])) {
     $regex = '/^[A-Za-zÉÈËéèëÀÂÄàäâÎÏïîÔÖôöÙÛÜûüùÆŒÇç][A-Za-zÉÈËéèëÀÂÄàäâÎÏïîÔÖôöÙÛÜûüùÆŒÇç\-\s\']*$/';
 
@@ -72,8 +73,10 @@ if (isset($_POST['updatePatient'])) {
     } else {
         $errors['updatedPhone'] = 'Le champ "Téléphone" n\'a pas été renseigné.';
     }
+    // s'il n'y a pas d'erreurs...
     if (empty($errors)) {
         if ($Patient->updatePatientInfo()) {
+            // redirection vers la fiche du patient
             header('Location: ../controler/profil-patient-controler.php?patientId=' . $_GET['patientId']);
         } else {
             $errors = 'Une erreur est survenue, veuillez réessayer.';

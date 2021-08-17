@@ -1,8 +1,15 @@
 <?php
-// déclaration de la classe Patients
+// déclaration de la classe Appointments
 class Appointments
 {
-  
+    public $id = '';
+    public $lastname = '';
+    public $firstname = '';
+    public $dateHour = '';
+    public $idPatients = '';
+    private $pdo;
+
+
     // pour faire le lien avec la bdd, on appelle la fonction construct et on y instancie un nouvel objet 
     function __construct()
     {
@@ -49,18 +56,33 @@ class Appointments
             'INSERT INTO `appointments` (`dateHour`, `idPatients`) 
         VALUES (:dateHour,:idPatients)'
         );
-        $addAppointmentQuery->bindParam(':dateHour', $this->dateHour, PDO::PARAM_INT);
+
+        $addAppointmentQuery->bindParam(':dateHour', $this->dateHour, PDO::PARAM_STR);
         $addAppointmentQuery->bindParam(':idPatients', $this->idPatients, PDO::PARAM_INT);
         $addAppointmentQuery->execute();
+    }
+
+    // fonction pour lister les rdv
+    public function getAppointmentsList()
+    {
+        $getAppointmentsListQuery = $this->pdo->query(
+            'SELECT `id`, `dateHour`
+            FROM appointments'
+        );
+        return $getAppointmentsListQuery->fetchAll(PDO::FETCH_OBJ);
     }
 
     // fonction pour récupérer les informations du rdv
     public function getAppointmentInfo()
     {
-        $getAppointmentInfoQuery = $this->pdo->query(
-            'SELECT `dateHour`, `idPatients` 
-            FROM `appointments`'
+        $getAppointmentInfoQuery = $this->pdo->prepare(
+            'SELECT `id`, `dateHour`, `idPatients` 
+            FROM appointments
+            WHERE `id` = :id'
         );
+        $getAppointmentInfoQuery->bindParam(':id', $this->id, PDO::PARAM_INT);
+        $getAppointmentInfoQuery->execute();
+        // On retourne une ligne depuis un jeu de résultats associé à l'objet 
         return $getAppointmentInfoQuery->fetch(PDO::FETCH_OBJ);
     }
 
@@ -71,18 +93,19 @@ class Appointments
             'UPDATE `appointments` SET `dateHour` = :dateHour 
             WHERE `id` = :id'
         );
-        $updatePatientInfoQuery->bindParam(':dateHour', $this->dateHour, PDO::PARAM_INT);
+        $updatePatientInfoQuery->bindParam(':dateHour', $this->dateHour, PDO::PARAM_STR);
+        $updatePatientInfoQuery->bindParam(':id', $this->id, PDO::PARAM_INT);
         $updatePatientInfoQuery->execute();
     }
 
-    // fonction pour lister les rdv
-    public function getAppointmentsList()
+    // fonction pour supprimer un rdv
+    public function deleteAppointment()
     {
-        $getAppointmentsListQuery = $this->pdo->query(
-            'SELECT `dateHour`
-            FROM `appointments`'
+        $deleteAppointmentQuery = $this->pdo->prepare(
+            'DELETE FROM `appointments` WHERE `id`= :id '
         );
-        return $getAppointmentsListQuery->fetchAll(PDO::FETCH_OBJ);
+        $deleteAppointmentQuery->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $deleteAppointmentQuery->execute();
     }
 }
 

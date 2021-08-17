@@ -1,7 +1,7 @@
 <?php include('header.php'); ?>
 
-<div class="container my-5 p-5 border bg-light" style="max-width: 600px;">
-    <h1 class="fs-4 fw-lighter mb-5 text-center">Choisir un rendez-vous:</h1>
+<div class="content container my-5 p-5 border" style="max-width: 600px;">
+    <h2 class="fw-lighter mb-5 text-center">Choisir un rendez-vous:</h2>
     <form method="POST" action="" class="row g-3 needs-validation">
         <div class="row text-center">
             <div class="col-md-12 mb-5">
@@ -12,7 +12,7 @@
                     <?php
                     foreach ($getPatientId as $values) {
                     ?>">
-                    <option><?= $values->lastname ?>, <?= $values->firstname ?></option>
+                    <option value="<?= $values->id ?>"><?= $values->lastname ?>, <?= $values->firstname ?></option>
                 <?php
                     }
                 ?>

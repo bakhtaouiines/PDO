@@ -33,4 +33,5 @@ if (isset($_POST['buttonAddAppointment'])) {
     }
 }
 
+
 require('../vue/ajout-rendezvous.php');

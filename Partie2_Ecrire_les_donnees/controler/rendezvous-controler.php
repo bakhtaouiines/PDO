@@ -2,34 +2,52 @@
 // On charge le fichier du modèle.
 require('../modele/appointments.php');
 
+// on instancie un nouvel objet Appointment pour modifier ultérieurement les infos d'un rdv
+$AppointmentInfo = new Appointments;
+// on stocke dans une variable la fonction qui va appeler toutes les informations du rdv
+$AppointmentInfo->id = $_GET['rdvId'];
+$Appointment = $AppointmentInfo->getAppointmentInfo();
 
+///////////////////////////
 $Patient = new Appointments;
-// on y stocke l'ID du patient, que l'on va modifier
-$Patient->id = $_GET['patientId'];
+// on stocke l'ID du patient, que l'on va modifier
+$Patient->id = $Appointment->idPatients;
 // on stocke dans une variable la fonction qui va appeler toutes les informations du patient
 $PatientInfo = $Patient->getPatientById();
 
-// on instancie un nouvel objet Appointment pour modifier ultérieurement les infos d'un rdv
-$Appointment = new Appointments;
-// on stocke dans une variable la fonction qui va appeler toutes les informations du rdv
-$AppointmentInfo = $Appointment->getAppointmentInfo();
 
 $errors = [];
 // lorsqu'on clique sur le bouton "modifier les informations : 
 if (isset($_POST['updateAppointment'])) {
 
-    if (!empty($_POST['updatedDateHour'])) {
-        if (preg_match($regex, $_POST['updatedDateHour'])) {
-            $Appointment->dateHour = htmlspecialchars($_POST['updatedDateHour']); // On hydrate l'attribut dateHour de l'objet $Appointment et on convertit les caractères spéciaux en entités HTML
+    if (empty($_POST['updatedDateHour'])) {
+        $errors['updatedDateHour'] = 'Les modifications de jour et d\'horaire n\'ont pas été renseigné';    
         } else {
-            $errors['updatedDateHour'] = 'Les modifications de jour et d\'horaire n\'ont pas été renseigné';
+            $AppointmentInfo->dateHour = htmlspecialchars($_POST['updatedDateHour']); // On hydrate l'attribut dateHour de l'objet $Appointment et on convertit les caractères spéciaux en entités HTML
         }
         if (empty($errors)) {
-            if ($Appointment->updateAppointmentInfo()) {
-                header('Location: ../controler/rendezvous-controler.php?patientId=' . $_GET['patientId']);
+            if ($AppointmentInfo->updateAppointmentInfo()) {
+                header('Location: ../controler/rendezvous-controler.php?rdvId=' . $_GET['rdvId']);
             } else {
                 $errors = 'Une erreur est survenue, veuillez réessayer.';
             }
+        }
+    }
+
+// suppression du rdv
+if (isset($_POST['deleteAppointment'])) {
+    // si l'ID de l'utilisateur a été récupéré dans l'URL
+    if (isset($_GET['rdvId'])) {
+        $DeleteAppointmentInfo = new Appointments;
+        $DeleteAppointmentInfo->id = htmlspecialchars($_GET['rdvId']);
+        // on appelle la méthode pour supprimer la fiche du rdv
+        if ($DeleteAppointmentInfo->deleteAppointment()) {
+            // si tout est ok, on redirige vers la page de la liste des rdv
+            header('Location: ../controler/liste-rendezvous-controler.php');
+            exit;
+        } else {
+            // sinon, on affiche un msg d'erreur
+            $errors = 'Une erreur est survenue, veuillez réessayer.';
         }
     }
 }

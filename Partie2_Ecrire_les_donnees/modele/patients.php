@@ -8,6 +8,8 @@ class Patients
     public $birthdate = '';
     public $phone = '';
     public $mail = '';
+    public $dateHour = '';
+    public $idPatients = '';
     private $pdo;
 
     // pour faire le lien avec la bdd, on appelle la fonction construct et on y instancie un nouvel objet 
@@ -62,6 +64,19 @@ class Patients
         $getPatientInfoQuery->execute();
         // On retourne une ligne depuis un jeu de résultats associé à l'objet 
         return $getPatientInfoQuery->fetch(PDO::FETCH_OBJ);
+    }
+    // fonction pour récupérer les informations du rdv
+    public function getAppointmentInfo()
+    {
+        $getAppointmentInfoQuery = $this->pdo->prepare(
+            'SELECT `id`, `dateHour`, `idPatients` 
+        FROM appointments
+        WHERE `id` = :id'
+        );
+        $getAppointmentInfoQuery->bindParam(':id', $this->id, PDO::PARAM_INT);
+        $getAppointmentInfoQuery->execute();
+        // On retourne une ligne depuis un jeu de résultats associé à l'objet 
+        return $getAppointmentInfoQuery->fetch(PDO::FETCH_OBJ);
     }
 
     // fonction pour modifier les infos d'un patient
