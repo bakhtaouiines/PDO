@@ -4,25 +4,20 @@
 
     <div class="accordion-item">
         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-
             <button type="button" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">Fiche Patient</button>
-
         </h2>
         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
             <div class="accordion-body">
-
                 <h3>
                     Patient n°<?= $PatientInfo->id ?></h3>
                 <h4 class="fst-italic"><?= $PatientInfo->lastname ?>, <?= $PatientInfo->firstname ?></h4>
-
-                <p>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Date de naissance: <?= date('d-m-Y', strtotime($PatientInfo->birthdate)) ?></li>
-                    <li class="list-group-item">Téléphone: <?= $PatientInfo->phone ?></li>
-                    <li class="list-group-item">Email: <?= $PatientInfo->mail ?></li>
+                    <li class="list-group-item lh-lg">Date de naissance: <?= date('d-m-Y', strtotime($PatientInfo->birthdate)) ?></li>
+                    <li class="list-group-item lh-lg">Téléphone: <?= $PatientInfo->phone ?></li>
+                    <li class="list-group-item lh-lg">Email: <?= $PatientInfo->mail ?></li>
                 </ul>
-                </p>
-                <div class="row d-flex justify-content-center">
+                <hr>
+                <div class="row d-flex justify-content-center my-4">
                     <div class="col-auto">
                         <button type="button" class="btn btn-outline-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#modifPatientModal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
@@ -56,14 +51,18 @@
             <div class="accordion-body">
                 <p>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><?= date('d-m-Y, g:i a', strtotime($Appointment->dateHour)) ?></li>
+                    <li class="list-group-item"><?= date('d-m-Y, g:i a', strtotime($AppointmentInfo->dateHour)) ?></li>
                 </ul>
                 </p>
             </div>
         </div>
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-secondary me-md-2" href="../controler/liste-patients-controler.php">Liste des patients</a>
+
+        <a class="btn btn-secondary me-md-2" href="../controler/liste-patients-controler.php">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
+            </svg> Liste des patients</a>
     </div>
 
 </div>

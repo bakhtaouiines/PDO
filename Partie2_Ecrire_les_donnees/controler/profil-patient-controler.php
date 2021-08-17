@@ -1,6 +1,7 @@
 <?php
 // On charge le fichier du modèle.
 require('../modele/patients.php');
+require('../modele/appointments.php');
 
 /////////////// affichage du patient sélectionné //////////////////
 
@@ -11,11 +12,12 @@ $Patient->id = $_GET['patientId'];
 // on stocke dans une variable la fonction qui va appeler toutes les informations du patient
 $PatientInfo = $Patient->getPatientInfo();
 
-// instance d'un nouvel objet pour lister les rendezvous du patient sélectionné
-$AppointmentInfo = new Patients;
-$AppointmentInfo->idPatients = $PatientInfo->id;
-$Appointment = $AppointmentInfo->getAppointmentInfo();
 
+// instance d'un nouvel objet pour lister les rendezvous du patient sélectionné
+$AppointmentInfo = new Appointments;
+$AppointmentInfo->idPatients = $Patient->id;
+$Appointment = $AppointmentInfo->getAppointmentInfo();
+print_r($Appointment);
 
 // tableau où seront stockées les erreurs
 $errors = [];

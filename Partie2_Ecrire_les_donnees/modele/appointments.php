@@ -67,7 +67,8 @@ class Appointments
     {
         $getAppointmentsListQuery = $this->pdo->query(
             'SELECT `id`, `dateHour`
-            FROM appointments'
+            FROM appointments
+            ORDER BY `dateHour`ASC'
         );
         return $getAppointmentsListQuery->fetchAll(PDO::FETCH_OBJ);
     }

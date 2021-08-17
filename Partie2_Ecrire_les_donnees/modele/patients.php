@@ -45,7 +45,8 @@ class Patients
         // On récupère tout le contenu de la table patients
         $getPatientListQuery = $this->pdo->query(
             'SELECT `id`, `lastname`, `firstname` 
-            FROM patients'
+            FROM patients
+            ORDER BY `lastname` ASC'
         );
         // On retourne un tableau contenant toutes les lignes du jeu d'enregistrements. Le tableau représente chaque ligne comme soit un tableau de valeurs des colonnes, soit un objet avec des propriétés correspondant à chaque nom de colonne.
         // FETCH_OBJ retourne un objet anonyme avec les noms de propriétés qui correspondent aux noms des colonnes retournés dans le jeu de résultats
@@ -64,19 +65,6 @@ class Patients
         $getPatientInfoQuery->execute();
         // On retourne une ligne depuis un jeu de résultats associé à l'objet 
         return $getPatientInfoQuery->fetch(PDO::FETCH_OBJ);
-    }
-    // fonction pour récupérer les informations du rdv
-    public function getAppointmentInfo()
-    {
-        $getAppointmentInfoQuery = $this->pdo->prepare(
-            'SELECT `id`, `dateHour`, `idPatients` 
-        FROM appointments
-        WHERE `id` = :id'
-        );
-        $getAppointmentInfoQuery->bindParam(':id', $this->id, PDO::PARAM_INT);
-        $getAppointmentInfoQuery->execute();
-        // On retourne une ligne depuis un jeu de résultats associé à l'objet 
-        return $getAppointmentInfoQuery->fetch(PDO::FETCH_OBJ);
     }
 
     // fonction pour modifier les infos d'un patient

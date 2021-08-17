@@ -24,7 +24,8 @@
                         </li>
                     </ul>
                 </div>
-                <div class="row d-flex justify-content-center">
+                <hr>
+                <div class="row d-flex justify-content-center my-4">
                     <div class="col-6">
                         <button type="button" class="btn btn-outline-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#modifAppointmentModal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">

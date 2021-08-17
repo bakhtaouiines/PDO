@@ -26,7 +26,7 @@
                         <a href="../controler/profil-patient-controler.php?patientId=<?= $value->id ?>" class="btn btn-success btn-sm p-2" role="button">
                             Consulter
                         </a>
-                        <a href="" class="btn btn-danger btn-sm p-2" role="button">
+                        <a href="" class="btn btn-danger btn-sm p-2" title="Supprime le patient ET le rdv" role="button">
                             Supprimer
                         </a>
                     </td>
