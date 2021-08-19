@@ -5,20 +5,23 @@ require('../modele/appointments.php');
 $Patients = new Patients;
 $PatientsList = $Patients->getPatientsList();
 
-
-// suppression du patient de la liste
-if (isset($_POST['deletePatientAndAppointment'])) {
-    $DeletePatientInfo = new Appointments;
-    $DeletePatientInfo->idPatients;
-    $DeletePatient = $DeletePatientInfo->deleteAppointmentPatient();
+// suppression du patient ET du rdv de la liste
+if (isset($_POST['delete_idPatients'])) {
+    $DeletePatient = new Appointments;
+    $DeletePatient->idPatients = htmlspecialchars($_POST['delete_idPatients']);
+    $DeletePatientFromList = $DeletePatient->deleteAppointmentPatient();
+    $Patients->id = htmlspecialchars($_POST['delete_idPatients']);
+    $Patients->deletePatient();
+    header('Refresh:0');
 }
 
-// suppression du patient ET ses rdv depuis la liste 
-if (isset($_POST['deletePatient'])) {
-    $DeletePatientFromList = new Patients;
-    $DeletePatientFromListTest = $DeletePatientFromList->deletePatient();
-    // si tout est ok, on redirige vers la page de la liste des patients
-    header('Location: liste-patients-controler.php');
+// recherche de patient
+if (isset($_POST['submitSearchPatient'])) {
+    if (!empty($_GET['searchPatient'])) {
+        $SearchPatientsList = htmlspecialchars($_GET['patientId']);
+        $SearchPatientsList = $Patients->getPatientsList();
+        header('Location: ../controler/profil-patient-controler.php?patientId=' . $_GET['patientId']);
+    }
 }
 
 // On charge le fichier de la vue (l'affichage), qui va présenter les informations dans une page HTML.

@@ -1,6 +1,7 @@
 <?php include('header.php'); ?>
 
 <div class="container p-3" style="width: auto;">
+    <!-- bouton redirige vers formulaire ajout patient -->
     <div class="row">
         <div class="col-auto ms-auto mb-3">
             <a href="../controler/ajout-patient-controler.php" class="btn btn-outline-success btn-lg p-3" role="button">
@@ -10,6 +11,16 @@
         </div>
     </div>
     <table class="table table-hover table-bordered table-responsive bg-light shadow-sm">
+        <!-- formulaire  de recherche de patient -->
+        <form method="GET" action="">
+            <div class="input-group rounded mb-3">
+                <input type="search" id="searchPatient" name="searchPatient" class="form-control rounded" placeholder="Rechercher un patient" aria-label="Rechercher un patient">
+                <button type="submit" id="submitSearchPatient" name="submitSearchPatient" class="input-group-text border-0 bg-light">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </form>
+        <!-- tableau patients -->
         <thead style="background-color: #2edb98;">
             <tr class="align-middle ">
                 <th scope="col" class="text-center text-uppercase p-4">Nom</th>
@@ -32,7 +43,7 @@
                         <a href="../controler/profil-patient-controler.php?patientId=<?= $value->id ?>" class="btn btn-success btn-sm p-2" role="button">
                             Consulter
                         </a>
-                        <button type="button" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#deletePatientModal">
+                        <button type="button" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#deletePatientModal" onClick="deleteIdPatients(<?= $value->id ?>)">
                             Supprimer
                         </button>
                     </td>
@@ -60,8 +71,8 @@
             </div>
             <div class="modal-footer">
                 <form method="POST" action="">
-                    <button type="submit" id="deletePatientAndAppointment" name="deletePatientAndAppointment" class="btn btn-outline-danger btn-sm p-2">
-                        Confirmer</button>
+                    <input type="hidden" id="delete_idPatients" name="delete_idPatients" value="">
+                    <button type="submit" id="deletePatientAndAppointment" name="deletePatientAndAppointment" class="btn btn-outline-danger btn-sm p-2">Confirmer</button>
                 </form>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
             </div>

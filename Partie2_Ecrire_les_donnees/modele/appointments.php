@@ -9,7 +9,6 @@ class Appointments
     public $idPatients = '';
     private $pdo;
 
-
     // pour faire le lien avec la bdd, on appelle la fonction construct et on y instancie un nouvel objet 
     function __construct()
     {
@@ -67,8 +66,9 @@ class Appointments
     public function getAppointmentsList()
     {
         $getAppointmentsListQuery = $this->pdo->query(
-            'SELECT `id`, `dateHour`, `idPatients`
+            'SELECT `appointments`.`id`, `dateHour`, `idPatients`, `lastname`, `firstname`
             FROM appointments
+            LEFT JOIN patients ON `idPatients` = `patients`.`id`
             ORDER BY `dateHour`ASC'
         );
         return $getAppointmentsListQuery->fetchAll(PDO::FETCH_OBJ);
@@ -126,8 +126,8 @@ class Appointments
         $deleteAppointmentQuery->bindParam(':id', $this->id, PDO::PARAM_INT);
         $deleteAppointmentQuery->execute();
     }
-    
-    // fonction pour supprimer un rdv depuis la liste des patients 
+
+    // fonction pour supprimer rdv + patient 
     public function deleteAppointmentPatient()
     {
         $deleteAppointmentQuery = $this->pdo->prepare(
@@ -138,13 +138,3 @@ class Appointments
         $deleteAppointmentQuery->execute();
     }
 }
-
-    // on liste les rendez-vous du patient
-    // public function listAppointmentsByPatient()
-    // {
-    //     $listAppointmentsByPatientQuery = $this->pdo->query(
-    //         'SELECT `dateHour`
-    //     FROM `appointments`'
-    //     );
-    //     return $listAppointmentsByPatientQuery->fetch(PDO::FETCH_OBJ);
-    // }

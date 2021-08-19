@@ -48,7 +48,7 @@
                 ?>
                     <p>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><?= date('d-m-Y, g:i a', strtotime($value->dateHour)) ?></li>
+                        <li class="list-group-item text-center text-success fs-3"><?= date('d-m-Y, G:i', strtotime($value->dateHour)) ?></li>
                     </ul>
                     </p>
                 <?php

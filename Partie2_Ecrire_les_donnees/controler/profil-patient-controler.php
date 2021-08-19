@@ -89,6 +89,7 @@ if (isset($_POST['deletePatient'])) {
         $DeletePatientInfo = new Patients;
         $DeletePatientInfo->id = htmlspecialchars($_GET['patientId']);
         $DeletePatient = $DeletePatientInfo->deletePatient();
+        
 // suppression du patient ET du rdv    
         $DeleteAppointmentAndPatient = new Appointments;
         $DeleteAppointmentAndPatient->idPatients = htmlspecialchars($_GET['patientId']);

@@ -6,6 +6,10 @@ function addPatient() {
     }, 3000);
 }
 
-function deleteId() {
-    document.getElementById('delete_id').value = deleteId();
+function deleteId(id) {
+    document.getElementById('delete_id').value = id;
+}
+
+function deleteIdPatients(idPatients) {
+    document.getElementById('delete_idPatients').value = idPatients;
 }

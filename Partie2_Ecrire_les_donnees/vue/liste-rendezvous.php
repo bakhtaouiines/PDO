@@ -26,13 +26,13 @@
             foreach ($AppointmentsList as $value) {
             ?>
                 <tr class="align-middle">
-                <td class="text-center p-3"></td>
+                    <td class="text-center p-3"><?= $value->lastname ?>, <?= $value->firstname ?></td>
                     <td class="text-center p-3"><?= date('d-m-Y, G:i', strtotime($value->dateHour)) ?></td>
                     <td class="text-center p-3">
                         <a href="../controler/rendezvous-controler.php?rdvId=<?= $value->id ?>" class="btn btn-success btn-sm p-2" role="button">
                             Consulter
                         </a>
-                        <button type="button" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#deleteAppointmentModal">
+                        <button type="button" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#deleteAppointmentModal" onClick="deleteId(<?= $value->id ?>)">
                             Supprimer
                         </button>
                     </td>
@@ -41,7 +41,7 @@
             }
             ?>
         </tbody>
-        
+
     </table>
 </div>
 <!-- Modal confirmation suppression de RDV -->
@@ -58,8 +58,10 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <form method="GET" action="">                  
-                    <button type="submit" id="deleteAppointment" name="deleteAppointment" class="btn btn-outline-danger btn-sm p-2" name="deleteAppointment"><input type="hidden" id="delete_id" value="">Confirmer</button>
+                <form method="POST" action="">
+                    <input type="hidden" id="delete_id" name="delete_id" value="">
+                    <button type="submit" id="deleteAppointment" name="deleteAppointment" class="btn btn-outline-danger btn-sm p-2">
+                        Confirmer</button>
                 </form>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
             </div>

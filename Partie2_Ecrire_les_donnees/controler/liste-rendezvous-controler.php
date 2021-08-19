@@ -5,12 +5,11 @@ $Appointments = new Appointments;
 $AppointmentsList = $Appointments->getAppointmentsList();
 
 //suppression du rdv depuis la liste
-if (isset($_GET['deleteAppointment'])) {
-    // si l'ID de l'utilisateur a été récupéré dans l'URL
-    if (isset($_GET['rdvId'])) {
+if (isset($_POST['delete_id'])) {
     $DeleteAppointment = new Appointments;
-    $DeleteAppointment->id = htmlspecialchars($_GET['rdvId']);
+    $DeleteAppointment->id = htmlspecialchars($_POST['delete_id']);
     $DeleteAppointmentFromList = $DeleteAppointment->deleteAppointment();
-    }
+    header('Refresh:0');
 }
+
 require('../vue/liste-rendezvous.php');
