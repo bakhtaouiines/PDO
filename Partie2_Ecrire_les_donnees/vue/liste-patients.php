@@ -1,15 +1,21 @@
 <?php include('header.php'); ?>
 
-<div class="content container p-5 " style="width: auto;">
-    <table class="table table-hover table-bordered table-responsive">
+<div class="container p-3" style="width: auto;">
+    <div class="row">
+        <div class="col-auto ms-auto mb-3">
+            <a href="../controler/ajout-patient-controler.php" class="btn btn-outline-success btn-lg p-3" role="button">
+                <i class="bi bi-person-plus fs-4 p-2"></i>
+                Ajouter un patient
+            </a>
+        </div>
+    </div>
+    <table class="table table-hover table-bordered table-responsive bg-light shadow-sm">
         <thead style="background-color: #2edb98;">
             <tr class="align-middle ">
                 <th scope="col" class="text-center text-uppercase p-4">Nom</th>
                 <th scope="col" class="text-center text-uppercase p-4">Prénom</th>
                 <th scope="col" class="text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-                    </svg>
+                    <i class="bi bi-person fs-2"></i>
                 </th>
             </tr>
         </thead>
@@ -26,9 +32,9 @@
                         <a href="../controler/profil-patient-controler.php?patientId=<?= $value->id ?>" class="btn btn-success btn-sm p-2" role="button">
                             Consulter
                         </a>
-                        <a href="" class="btn btn-danger btn-sm p-2" title="Supprime le patient ET le rdv" role="button">
+                        <button type="button" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#deletePatientModal">
                             Supprimer
-                        </a>
+                        </button>
                     </td>
                 </tr>
             <?php
@@ -36,14 +42,30 @@
             ?>
         </tbody>
     </table>
-    <div class="row">
-        <div class="col-auto ms-auto my-5">
-            <a href="../controler/ajout-patient-controler.php" class="btn btn-outline-success btn-lg p-3" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
-                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
-                </svg>Ajouter un patient</a>
+
+</div>
+<!-- Modal confirmation suppression patient -->
+<div class="modal fade" id="deletePatientModal" tabindex="-1" aria-labelledby="deletePatientModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content text-center p-3">
+            <div class="modal-header">
+                <h5 class="modal-title " id="exampleModalLabel">Confirmation de suppression du patient</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="lead lh-sm">
+                    Souhaitez-vous vraiment supprimer ce patient?
+                <p class="fw-bold text-danger">Cela supprimera sa fiche d'informations ainsi que ses rendez-vous.</p>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <form method="POST" action="">
+                    <button type="submit" id="deletePatientAndAppointment" name="deletePatientAndAppointment" class="btn btn-outline-danger btn-sm p-2">
+                        Confirmer</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+            </div>
         </div>
     </div>
 </div>
-
 <?php include('footer.php'); ?>

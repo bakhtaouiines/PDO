@@ -16,8 +16,7 @@ $PatientInfo = $Patient->getPatientInfo();
 // instance d'un nouvel objet pour lister les rendezvous du patient sélectionné
 $AppointmentInfo = new Appointments;
 $AppointmentInfo->idPatients = $Patient->id;
-$Appointment = $AppointmentInfo->getAppointmentInfo();
-print_r($Appointment);
+$Appointment = $AppointmentInfo->getAppointmentInfoPatient();
 
 // tableau où seront stockées les erreurs
 $errors = [];
@@ -77,12 +76,9 @@ if (isset($_POST['updatePatient'])) {
     }
     // s'il n'y a pas d'erreurs...
     if (empty($errors)) {
-        if ($Patient->updatePatientInfo()) {
-            // redirection vers la fiche du patient
-            header('Location: ../controler/profil-patient-controler.php?patientId=' . $_GET['patientId']);
-        } else {
-            $errors = 'Une erreur est survenue, veuillez réessayer.';
-        }
+        $Patient->updatePatientInfo();
+        // redirection vers la fiche du patient
+        header('Location: profil-patient-controler.php?patientId=' . $_GET['patientId']);
     }
 }
 
@@ -92,15 +88,25 @@ if (isset($_POST['deletePatient'])) {
     if (isset($_GET['patientId'])) {
         $DeletePatientInfo = new Patients;
         $DeletePatientInfo->id = htmlspecialchars($_GET['patientId']);
-        // on appelle la méthode pour supprimer la fiche d'un patient
-        if ($DeletePatientInfo->deletePatient()) {
-            // si tout est ok, on redirige vers la page de la liste des patients
-            header('Location: ../controler/liste-patients-controler.php');
-            exit;
-        } else {
-            // sinon, on affiche un msg d'erreur
-            $errors = 'Une erreur est survenue, veuillez réessayer.';
-        }
+        $DeletePatient = $DeletePatientInfo->deletePatient();
+// suppression du patient ET du rdv    
+        $DeleteAppointmentAndPatient = new Appointments;
+        $DeleteAppointmentAndPatient->idPatients = htmlspecialchars($_GET['patientId']);
+        $DeleteAppointment = $DeleteAppointmentAndPatient->deleteAppointment();
+        // si tout est ok, on redirige vers la page de la liste des patients
+        header('Location: liste-patients-controler.php');
+    }
+}
+
+// suppression du rdv depuis la fiche patient
+if (isset($_POST['deleteAppointment'])) {
+    // si l'ID de l'utilisateur a été récupéré dans l'URL
+    if (isset($_GET['patientId'])) {
+        $DeleteAppointmentInfo = new Appointments;
+        $DeleteAppointmentInfo->idPatients = htmlspecialchars($_GET['patientId']);
+        $DeleteAppointment = $DeleteAppointmentInfo->deleteAppointmentPatient();
+        // si tout est ok, on redirige vers la page de la liste des rdv
+        header('Location: profil-patient-controler.php?patientId=' . $_GET['patientId']);
     }
 }
 

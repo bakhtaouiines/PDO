@@ -21,18 +21,15 @@ $errors = [];
 if (isset($_POST['updateAppointment'])) {
 
     if (empty($_POST['updatedDateHour'])) {
-        $errors['updatedDateHour'] = 'Les modifications de jour et d\'horaire n\'ont pas été renseigné';    
-        } else {
-            $AppointmentInfo->dateHour = htmlspecialchars($_POST['updatedDateHour']); // On hydrate l'attribut dateHour de l'objet $Appointment et on convertit les caractères spéciaux en entités HTML
-        }
-        if (empty($errors)) {
-            if ($AppointmentInfo->updateAppointmentInfo()) {
-                header('Location: ../controler/rendezvous-controler.php?rdvId=' . $_GET['rdvId']);
-            } else {
-                $errors = 'Une erreur est survenue, veuillez réessayer.';
-            }
-        }
+        $errors['updatedDateHour'] = 'Les modifications de jour et d\'horaire n\'ont pas été renseigné';
+    } else {
+        $AppointmentInfo->dateHour = htmlspecialchars($_POST['updatedDateHour']); // On hydrate l'attribut dateHour de l'objet $Appointment et on convertit les caractères spéciaux en entités HTML
     }
+    if (empty($errors)) {
+        $AppointmentInfo->updateAppointmentInfo();
+        header('Location: ../controler/rendezvous-controler.php?rdvId=' . $_GET['rdvId']);
+    }
+}
 
 // suppression du rdv
 if (isset($_POST['deleteAppointment'])) {
@@ -40,16 +37,11 @@ if (isset($_POST['deleteAppointment'])) {
     if (isset($_GET['rdvId'])) {
         $DeleteAppointmentInfo = new Appointments;
         $DeleteAppointmentInfo->id = htmlspecialchars($_GET['rdvId']);
-        // on appelle la méthode pour supprimer la fiche du rdv
-        if ($DeleteAppointmentInfo->deleteAppointment()) {
-            // si tout est ok, on redirige vers la page de la liste des rdv
-            header('Location: ../controler/liste-rendezvous-controler.php');
-            exit;
-        } else {
-            // sinon, on affiche un msg d'erreur
-            $errors = 'Une erreur est survenue, veuillez réessayer.';
-        }
+        $DeleteAppointment = $DeleteAppointmentInfo->deleteAppointment();
+        // si tout est ok, on redirige vers la page de la liste des rdv
+        header('Location: liste-rendezvous-controler.php');
     }
 }
+
 
 require('../vue/rendezvous.php');

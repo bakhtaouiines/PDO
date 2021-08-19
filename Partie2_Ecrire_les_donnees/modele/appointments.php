@@ -41,7 +41,8 @@ class Appointments
     {
         $getAllPatientInfoQuery = $this->pdo->prepare(
             'SELECT `id`, `lastname`, `firstname` 
-            FROM `patients`'
+            FROM `patients`
+            ORDER BY `lastname` ASC'
         );
         $getAllPatientInfoQuery->bindParam(':id', $this->id, PDO::PARAM_INT);
         $getAllPatientInfoQuery->execute();
@@ -66,14 +67,29 @@ class Appointments
     public function getAppointmentsList()
     {
         $getAppointmentsListQuery = $this->pdo->query(
-            'SELECT `id`, `dateHour`
+            'SELECT `id`, `dateHour`, `idPatients`
             FROM appointments
             ORDER BY `dateHour`ASC'
         );
         return $getAppointmentsListQuery->fetchAll(PDO::FETCH_OBJ);
     }
 
-    // fonction pour récupérer les informations du rdv
+    // fonction pour récupérer les informations du rdv $_GET['patientId']
+    public function getAppointmentInfoPatient()
+    {
+        $getAppointmentInfoQuery = $this->pdo->prepare(
+            'SELECT `id`, `dateHour`, `idPatients` 
+            FROM appointments
+            WHERE `idPatients` = :idPatients'
+        );
+        $getAppointmentInfoQuery->bindParam(':idPatients', $this->idPatients, PDO::PARAM_INT);
+        $getAppointmentInfoQuery->execute();
+
+        // On retourne une ligne depuis un jeu de résultats associé à l'objet 
+        return $getAppointmentInfoQuery->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    // fonction pour récupérer les informations du rdv $_GET['rdvId']
     public function getAppointmentInfo()
     {
         $getAppointmentInfoQuery = $this->pdo->prepare(
@@ -83,6 +99,7 @@ class Appointments
         );
         $getAppointmentInfoQuery->bindParam(':id', $this->id, PDO::PARAM_INT);
         $getAppointmentInfoQuery->execute();
+
         // On retourne une ligne depuis un jeu de résultats associé à l'objet 
         return $getAppointmentInfoQuery->fetch(PDO::FETCH_OBJ);
     }
@@ -103,9 +120,21 @@ class Appointments
     public function deleteAppointment()
     {
         $deleteAppointmentQuery = $this->pdo->prepare(
-            'DELETE FROM `appointments` WHERE `id`= :id '
+            'DELETE FROM `appointments` 
+            WHERE `id`= :id '
         );
-        $deleteAppointmentQuery->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $deleteAppointmentQuery->bindParam(':id', $this->id, PDO::PARAM_INT);
+        $deleteAppointmentQuery->execute();
+    }
+    
+    // fonction pour supprimer un rdv depuis la liste des patients 
+    public function deleteAppointmentPatient()
+    {
+        $deleteAppointmentQuery = $this->pdo->prepare(
+            'DELETE FROM `appointments` 
+            WHERE `idPatients`= :idPatients'
+        );
+        $deleteAppointmentQuery->bindParam(':idPatients', $this->idPatients, PDO::PARAM_INT);
         $deleteAppointmentQuery->execute();
     }
 }

@@ -87,9 +87,11 @@ class Patients
     public function deletePatient()
     {
         $deletePatientQuery = $this->pdo->prepare(
-            'DELETE FROM `patients` WHERE `id`= :id '
+            'DELETE FROM `patients` 
+            WHERE `id`= :id '
         );
         $deletePatientQuery->bindValue(':id', $this->id, PDO::PARAM_INT);
         $deletePatientQuery->execute();
+        
     }
 }

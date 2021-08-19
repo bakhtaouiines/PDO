@@ -20,22 +20,15 @@
                 <div class="row d-flex justify-content-center my-4">
                     <div class="col-auto">
                         <button type="button" class="btn btn-outline-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#modifPatientModal">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                            </svg>
-                            </svg>Modifier les informations
+                            <i class="bi bi-pencil"></i>
+                            Modifier les informations
                         </button>
                     </div>
                     <div class="col-auto">
-                        <form method="POST" action="">
-                            <button type="submit" id="deletePatient" name="deletePatient" class="btn btn-outline-danger btn-sm p-2" name="deletePatient">
-                                <svg xmlns=" http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
-                                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-                                    <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z" />
-                                </svg>
-                                </svg>Supprimer le patient
-                            </button>
-                        </form>
+                        <button type="button" class="btn btn-outline-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#deletePatientModal">
+                            <i class="bi bi-person-x"></i>
+                            Supprimer le patient
+                        </button>
                     </div>
                 </div>
             </div>
@@ -49,42 +42,34 @@
         </h2>
         <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
             <div class="accordion-body">
-                <p>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><?= date('d-m-Y, g:i a', strtotime($AppointmentInfo->dateHour)) ?></li>
-                </ul>
-                </p>
+                <?php
+                for ($i = 0; $i < count($Appointment); $i++) {
+                    $value = $Appointment[$i];
+                ?>
+                    <p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><?= date('d-m-Y, g:i a', strtotime($value->dateHour)) ?></li>
+                    </ul>
+                    </p>
+                <?php
+                }
+                ?>
+                <button type="button" class="btn btn-outline-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#deleteAppointmentModal">
+                    <i class="bi bi-person-x"></i>
+                    Annuler le rendez-vous
+                </button>
             </div>
         </div>
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-
         <a class="btn btn-secondary me-md-2" href="../controler/liste-patients-controler.php">
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
-                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
-            </svg> Liste des patients</a>
+            <i class="bi bi-person-lines-fill"></i>
+            Liste des patients</a>
     </div>
-
 </div>
 </div>
 
-<!-- fenêtre modale pour confirmer la suppression -->
-<!-- <div class="modal hide fade" id="confirmModal">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>Confirmation de la suppression</h3>
-    </div>
-    <div class="modal-body">
-        <p>Etes-vous sûr de vouloir supprimer cet élément ?</p>
-    </div>
-    <div class="modal-footer">
-        <a href="#" class="btn" id="confirmModalNo">Non</a>
-        <a href="#" class="btn btn-primary" id="confirmModalYes">Oui</a>
-    </div>
-</div> -->
-
-
-<!-- Modal -->
+<!-- Modal modif info patient-->
 <div class="modal fade" id="modifPatientModal" tabindex="-1" aria-labelledby="modifPatientModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content p-5">
@@ -143,10 +128,57 @@
                     </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-between">
-                    <input type="submit" id="updatePatient" class="btn btn-success btn-sm px-3" name="updatePatient" value="Enregistrer les modifications">
+                    <button type="submit" id="updatePatient" class="btn btn-outline-success btn-sm px-3" name="updatePatient">Enregistrer les modifications</button>
                     <button type="button" class="btn btn-secondary btn-sm px-3" data-bs-dismiss="modal">Annuler</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+<!-- Modal confirmation suppression de RDV -->
+<div class="modal fade" id="deleteAppointmentModal" tabindex="-1" aria-labelledby="deleteAppointmentModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content text-center p-5">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression de RDV</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="lead lh-sm text-danger">
+                    Souhaitez-vous vraiment annuler ce rendez-vous?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <form method="POST" action="">
+                    <button type="submit" id="deleteAppointment" name="deleteAppointment" class="btn btn-outline-danger btn-sm p-2" name="deletePatient">Confirmer</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal confirmation suppression patient -->
+<div class="modal fade" id="deletePatientModal" tabindex="-1" aria-labelledby="deletePatientModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content text-center p-3">
+            <div class="modal-header">
+                <h5 class="modal-title " id="exampleModalLabel">Confirmation de suppression du patient</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="lead lh-sm">
+                    Souhaitez-vous vraiment supprimer ce patient?
+                <p class="fw-bold">Cela supprimera sa fiche d'informations ainsi que ses rendez-vous.</p>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <form method="POST" action="">
+                    <button type="submit" id="deletePatient" name="deletePatient" class="btn btn-outline-danger btn-sm p-2" name="deletePatient">
+                        Confirmer</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+            </div>
         </div>
     </div>
 </div>
