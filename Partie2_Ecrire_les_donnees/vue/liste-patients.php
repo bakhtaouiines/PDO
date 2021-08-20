@@ -1,25 +1,52 @@
 <?php include('header.php'); ?>
 
-<div class="container p-3" style="width: auto;">
+<div class="container p-3" style="width:auto;">
     <!-- bouton redirige vers formulaire ajout patient -->
-    <div class="row">
-        <div class="col-auto ms-auto mb-3">
-            <a href="../controler/ajout-patient-controler.php" class="btn btn-outline-success btn-lg p-3" role="button">
-                <i class="bi bi-person-plus fs-4 p-2"></i>
+    <div class="row p-2">
+        <div class="col-md-6 offset-md-12">
+            <a href="../controler/ajout-patient-controler.php" class="btn btn-outline-success p-2" role="button">
+                <i class="bi bi-person-plus fs-5 p-2"></i>
                 Ajouter un patient
             </a>
         </div>
-    </div>
 
-    <!-- formulaire  de recherche de patient -->
-    <form method="GET" action="">
-        <div class="input-group rounded mb-3">
-            <input type="search" id="searchPatient" name="searchPatient" class="form-control rounded" placeholder="Rechercher un patient" aria-label="Rechercher un patient">
-            <button type="submit" id="submitSearchPatient" name="submitSearchPatient" class="input-group-text border-0 bg-light">
-                <i class="bi bi-search"></i>
-            </button>
+        <!-- formulaire  de recherche de patient -->
+        <div class="col-md-6 offset-md-3">
+            <form method="GET" action="">
+                <div class="input-group rounded mb-3">
+                    <input type="search" id="searchPatient" name="searchPatient" class="form-control rounded" placeholder="Rechercher un patient" aria-label="Rechercher un patient">
+                    <button type="submit" id="submitSearchPatient" name="submitSearchPatient" class="input-group-text border-0 bg-light">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
         </div>
-    </form>
+
+        <!-- pagination -->
+        <div class="col-auto ms-auto">
+            <nav aria-label="navigationPatients">
+                <ul class="pagination">
+                    <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
+                        <a class="page-link" href="?page=<?= $currentPage - 1 ?>" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    <?php for ($page = 1; $page <= $numberOfPages; $page++) : ?>
+                        <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
+                            <a class="page-link" href="?page=<?= $page ?>"><?= $page ?></a>
+                        </li>
+                    <?php endfor ?>
+
+                    <li class="page-item <?= ($currentPage == $numberOfPages) ? "disabled" : "" ?>">
+                        <a class="page-link" href="?page=<?= $currentPage + 1 ?>" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 
     <!-- tableau patients -->
     <table class="table table-hover table-bordered table-responsive bg-light shadow-sm">
@@ -32,7 +59,6 @@
                 </th>
             </tr>
         </thead>
-
         <tbody>
             <?php
             // On affiche chaque entrée une à une
@@ -55,10 +81,8 @@
             ?>
         </tbody>
     </table>
-
-
-
 </div>
+
 <!-- Modal confirmation suppression patient -->
 <div class="modal fade" id="deletePatientModal" tabindex="-1" aria-labelledby="deletePatientModal" aria-hidden="true">
     <div class="modal-dialog">
@@ -83,4 +107,5 @@
         </div>
     </div>
 </div>
+
 <?php include('footer.php'); ?>

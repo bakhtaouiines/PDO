@@ -100,9 +100,36 @@ class Patients
         $searchPatientQuery = $this->pdo->prepare(
             "SELECT `id`, `lastname`, `firstname`
             FROM `patients`
-            WHERE `lastname` OR `firstname` LIKE '%". $SearchResult ."%'"
-        );  
+            WHERE `lastname` OR `firstname` LIKE '%" . $SearchResult . "%'"
+        );
         $searchPatientQuery->execute();
         return $searchPatientQuery->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    // fonctions pour la pagination
+    // d'abord on détermine le nombre total de patients
+    public function totalPagesPatient()
+    {
+        $totalPages = $this->pdo->prepare(
+            'SELECT COUNT(*) 
+            AS numberPatient
+        FROM `patients`'
+        );
+        $totalPages->execute();
+        return $totalPages->fetch(PDO::FETCH_OBJ);
+    }
+    public function infoPagePatient($firstPage, $numberResultsPage)
+    {
+        $infoPage = $this->pdo->prepare(
+            'SELECT `id`, `lastname`, `firstname` 
+            FROM patients
+            ORDER BY `lastname`
+            LIMIT :numberResultsPage
+            OFFSET :firstPage'           
+        );
+        $infoPage->bindValue('numberResultsPage', $numberResultsPage, PDO::PARAM_INT);
+        $infoPage->bindValue('firstPage', $firstPage, PDO::PARAM_INT);
+        $infoPage->execute();
+        return $infoPage->fetchAll(PDO::FETCH_OBJ);
     }
 }

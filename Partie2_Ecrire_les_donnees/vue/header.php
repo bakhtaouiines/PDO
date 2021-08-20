@@ -37,7 +37,7 @@
                 <a href="../controler/liste-patients-controler.php" class="list-group-item list-group-item-action">Liste des patients</a>
                 <a href="../controler/ajout-rendezvous-controler.php" class="list-group-item list-group-item-action">Ajouter un rendez-vous</a>
                 <a href="../controler/liste-rendezvous-controler.php" class="list-group-item list-group-item-action">Liste des rendez-vous</a>
-                <a href="#" class="list-group-item list-group-item-action">Ajouter un patient et un rendez-vous</a>
+                <a href="../controler/ajout-patient-rendezvous-controler.php" class="list-group-item list-group-item-action">Ajouter un patient et un rendez-vous</a>
             </div>
         </div>
     </div>
