@@ -5,6 +5,7 @@ require('../modele/appointments.php');
 $Patients = new Patients;
 $PatientsList = $Patients->getPatientsList();
 
+
 // suppression du patient ET du rdv de la liste
 if (isset($_POST['delete_idPatients'])) {
     $DeletePatient = new Appointments;
@@ -16,12 +17,14 @@ if (isset($_POST['delete_idPatients'])) {
 }
 
 // recherche de patient
-if (isset($_POST['submitSearchPatient'])) {
+if (isset($_GET['submitSearchPatient'])) {
     if (!empty($_GET['searchPatient'])) {
-        $SearchPatientsList = htmlspecialchars($_GET['patientId']);
-        $SearchPatientsList = $Patients->getPatientsList();
-        header('Location: ../controler/profil-patient-controler.php?patientId=' . $_GET['patientId']);
+        $SearchPatientsList = htmlspecialchars($_GET['searchPatient']);
+        $SearchPatientsList = trim($SearchPatientsList); // supprime les espaces dans la requête de l'internaute
+        $SearchPatientsList = strip_tags($SearchPatientsList); // supprime les balises html dans la requête
+        $PatientsList = $Patients->searchPatient($SearchPatientsList);
     }
+
 }
 
 // On charge le fichier de la vue (l'affichage), qui va présenter les informations dans une page HTML.

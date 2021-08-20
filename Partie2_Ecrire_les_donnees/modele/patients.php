@@ -92,6 +92,17 @@ class Patients
         );
         $deletePatientQuery->bindValue(':id', $this->id, PDO::PARAM_INT);
         $deletePatientQuery->execute();
-        
+    }
+
+    // fonction pour rechercher un patient
+    public function searchPatient($SearchResult)
+    {
+        $searchPatientQuery = $this->pdo->prepare(
+            "SELECT `id`, `lastname`, `firstname`
+            FROM `patients`
+            WHERE `lastname` OR `firstname` LIKE '%". $SearchResult ."%'"
+        );  
+        $searchPatientQuery->execute();
+        return $searchPatientQuery->fetchAll(PDO::FETCH_OBJ);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 // On charge le fichier du modèle.
 require('../modele/appointments.php');
+require('../modele/patients.php');
 
 // on instancie un nouvel objet Appointment pour modifier ultérieurement les infos d'un rdv
 $AppointmentInfo = new Appointments;
@@ -9,11 +10,11 @@ $AppointmentInfo->id = $_GET['rdvId'];
 $Appointment = $AppointmentInfo->getAppointmentInfo();
 
 ///////////////////////////
-$Patient = new Appointments;
+$Patient = new Patients;
 // on stocke l'ID du patient, que l'on va modifier
 $Patient->id = $Appointment->idPatients;
 // on stocke dans une variable la fonction qui va appeler toutes les informations du patient
-$PatientInfo = $Patient->getPatientById();
+$PatientInfo = $Patient->getPatientInfo();
 
 
 $errors = [];

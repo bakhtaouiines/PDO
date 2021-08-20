@@ -7,6 +7,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="true" href="#">Rendez-vous</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="true" href="../controler/profil-patient-controler.php?patientId=<?= $PatientInfo->id ?>">Fiche-patient</a>
+                </li>
             </ul>
         </div>
 

@@ -18,6 +18,8 @@ $AppointmentInfo = new Appointments;
 $AppointmentInfo->idPatients = $Patient->id;
 $Appointment = $AppointmentInfo->getAppointmentInfoPatient();
 
+
+
 // tableau où seront stockées les erreurs
 $errors = [];
 // modification des informations du patient: 
@@ -99,17 +101,17 @@ if (isset($_POST['deletePatient'])) {
     }
 }
 
-// suppression du rdv depuis la fiche patient
-if (isset($_POST['deleteAppointment'])) {
-    // si l'ID de l'utilisateur a été récupéré dans l'URL
-    if (isset($_GET['patientId'])) {
-        $DeleteAppointmentInfo = new Appointments;
-        $DeleteAppointmentInfo->idPatients = htmlspecialchars($_GET['patientId']);
-        $DeleteAppointment = $DeleteAppointmentInfo->deleteAppointmentPatient();
-        // si tout est ok, on redirige vers la page de la liste des rdv
-        header('Location: profil-patient-controler.php?patientId=' . $_GET['patientId']);
-    }
-}
+// // suppression du rdv depuis la fiche patient
+// if (isset($_POST['deleteAppointment'])) {
+//     // si l'ID de l'utilisateur a été récupéré dans l'URL
+//     if (isset($_GET['patientId'])) {
+//         $DeleteAppointmentInfo = new Appointments;
+//         $DeleteAppointmentInfo->idPatients = htmlspecialchars($_GET['patientId']);
+//         $DeleteAppointment = $DeleteAppointmentInfo->deleteAppointmentPatient();
+//         // si tout est ok, on redirige vers la page de la liste des rdv
+//         header('Location: profil-patient-controler.php?patientId=' . $_GET['patientId']);
+//     }
+// }
 
 // On charge le fichier de la vue (l'affichage), qui va présenter les informations dans une page HTML.
 require('../vue/profil-patient.php');

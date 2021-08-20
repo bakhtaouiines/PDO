@@ -10,17 +10,19 @@
             </a>
         </div>
     </div>
+
+    <!-- formulaire  de recherche de patient -->
+    <form method="GET" action="">
+        <div class="input-group rounded mb-3">
+            <input type="search" id="searchPatient" name="searchPatient" class="form-control rounded" placeholder="Rechercher un patient" aria-label="Rechercher un patient">
+            <button type="submit" id="submitSearchPatient" name="submitSearchPatient" class="input-group-text border-0 bg-light">
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+    </form>
+
+    <!-- tableau patients -->
     <table class="table table-hover table-bordered table-responsive bg-light shadow-sm">
-        <!-- formulaire  de recherche de patient -->
-        <form method="GET" action="">
-            <div class="input-group rounded mb-3">
-                <input type="search" id="searchPatient" name="searchPatient" class="form-control rounded" placeholder="Rechercher un patient" aria-label="Rechercher un patient">
-                <button type="submit" id="submitSearchPatient" name="submitSearchPatient" class="input-group-text border-0 bg-light">
-                    <i class="bi bi-search"></i>
-                </button>
-            </div>
-        </form>
-        <!-- tableau patients -->
         <thead style="background-color: #2edb98;">
             <tr class="align-middle ">
                 <th scope="col" class="text-center text-uppercase p-4">Nom</th>
@@ -53,6 +55,8 @@
             ?>
         </tbody>
     </table>
+
+
 
 </div>
 <!-- Modal confirmation suppression patient -->

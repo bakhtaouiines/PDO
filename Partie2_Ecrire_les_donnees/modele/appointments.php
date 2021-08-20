@@ -84,8 +84,6 @@ class Appointments
         );
         $getAppointmentInfoQuery->bindParam(':idPatients', $this->idPatients, PDO::PARAM_INT);
         $getAppointmentInfoQuery->execute();
-
-        // On retourne une ligne depuis un jeu de résultats associé à l'objet 
         return $getAppointmentInfoQuery->fetchAll(PDO::FETCH_OBJ);
     }
 
@@ -99,8 +97,6 @@ class Appointments
         );
         $getAppointmentInfoQuery->bindParam(':id', $this->id, PDO::PARAM_INT);
         $getAppointmentInfoQuery->execute();
-
-        // On retourne une ligne depuis un jeu de résultats associé à l'objet 
         return $getAppointmentInfoQuery->fetch(PDO::FETCH_OBJ);
     }
 

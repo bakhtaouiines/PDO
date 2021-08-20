@@ -1,6 +1,6 @@
 <?php include('header.php'); ?>
 
-<div class="content container accordion p-5 border mb-3 shadow-sm p-3 mb-5 bg-body rounded" id=" accordionOne" style="width: 50rem;">
+<div class="container accordion p-5 border mb-3 shadow-sm p-3 mb-5 bg-body rounded" id=" accordionOne" style="width: 50rem;">
 
     <div class="accordion-item">
         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
@@ -48,16 +48,13 @@
                 ?>
                     <p>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-center text-success fs-3"><?= date('d-m-Y, G:i', strtotime($value->dateHour)) ?></li>
+                        <li class="list-group-item text-center fs-2 text-success"><?= date('d-m-Y, G:i a', strtotime($value->dateHour)) ?></li>
                     </ul>
                     </p>
                 <?php
                 }
                 ?>
-                <button type="button" class="btn btn-outline-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#deleteAppointmentModal">
-                    <i class="bi bi-person-x"></i>
-                    Annuler le rendez-vous
-                </button>
+                
             </div>
         </div>
     </div>
@@ -135,28 +132,7 @@
         </div>
     </div>
 </div>
-<!-- Modal confirmation suppression de RDV -->
-<div class="modal fade" id="deleteAppointmentModal" tabindex="-1" aria-labelledby="deleteAppointmentModal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content text-center p-5">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression de RDV</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p class="lead lh-sm text-danger">
-                    Souhaitez-vous vraiment annuler ce rendez-vous?
-                </p>
-            </div>
-            <div class="modal-footer">
-                <form method="POST" action="">
-                    <button type="submit" id="deleteAppointment" name="deleteAppointment" class="btn btn-outline-danger btn-sm p-2" name="deletePatient">Confirmer</button>
-                </form>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <!-- Modal confirmation suppression patient -->
 <div class="modal fade" id="deletePatientModal" tabindex="-1" aria-labelledby="deletePatientModal" aria-hidden="true">
