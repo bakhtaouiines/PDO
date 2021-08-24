@@ -10,7 +10,7 @@ class Patients
     public $mail = '';
     public $dateHour = '';
     public $idPatients = '';
-    private $pdo;
+    private $pdo = null;
 
     // pour faire le lien avec la bdd, on appelle la fonction construct et on y instancie un nouvel objet 
     function __construct()
@@ -31,12 +31,13 @@ class Patients
             'INSERT INTO `patients` (`lastname`, `firstname`, `birthdate`,`phone`,`mail`) 
         VALUES (:lastname, :firstname, :birthdate, :phone, :mail)'
         );
-        $addPatientQuery->bindParam(':lastname', $this->lastname, PDO::PARAM_STR);
+        $addPatientQuery->bindParam(':lastname', $this->lastname, PDO::PARAM_STR); // ':quelquechose' -> MARQUEUR NOMINATIF 
         $addPatientQuery->bindParam(':firstname', $this->firstname, PDO::PARAM_STR);
         $addPatientQuery->bindParam(':birthdate', $this->birthdate, PDO::PARAM_STR);
         $addPatientQuery->bindParam(':phone', $this->phone, PDO::PARAM_STR);
         $addPatientQuery->bindParam(':mail', $this->mail, PDO::PARAM_STR);
         $addPatientQuery->execute();
+        return $this->pdo->lastInsertId();
     }
 
     // on liste les patients
@@ -95,40 +96,68 @@ class Patients
     }
 
     // fonction pour rechercher un patient
-    public function searchPatient($SearchResult)
-    {
-        $searchPatientQuery = $this->pdo->prepare(
-            "SELECT `id`, `lastname`, `firstname`
-            FROM `patients`
-            WHERE `lastname` OR `firstname` LIKE '%" . $SearchResult . "%'"
-        );
-        $searchPatientQuery->execute();
-        return $searchPatientQuery->fetchAll(PDO::FETCH_OBJ);
-    }
+    // public function searchPatient($SearchResult)
+    // {
+    //     $searchPatientQuery = $this->pdo->prepare(
+    //         'SELECT `id`, `lastname`, `firstname`
+    //         FROM `patients`
+    //         WHERE `lastname` OR `firstname` LIKE :SearchResult'
+    //     );
+    //     $searchPatientQuery->bindValue(':SearchResult', '%' . $SearchResult . '%', PDO::PARAM_STR);
+    //     $searchPatientQuery->execute();
+    //     return $searchPatientQuery->fetchAll(PDO::FETCH_OBJ);
+    // }
 
     // fonctions pour la pagination
     // d'abord on détermine le nombre total de patients
-    public function totalPagesPatient()
+
+    public function totalPagesPatient($SearchPatientsList, $numberPatientPerPage = 5, $patientFilter = ['lastname'])
     {
+        $where = '';
+        if ($SearchPatientsList != '') {
+            $whereArray = [];
+            foreach ($patientFilter as $filter) {
+                $whereArray[] = '`' . $filter . '` LIKE :SearchPatientsList ';
+            }
+            $where = 'WHERE ' . implode(' OR ', $whereArray);
+        }
         $totalPages = $this->pdo->prepare(
-            'SELECT COUNT(*) 
-            AS numberPatient
-        FROM `patients`'
+            'SELECT COUNT(*) / :numberPatientPerPage
+            AS numberPages
+        FROM `patients` ' . $where
         );
+        $totalPages->bindValue(':numberPatientPerPage', $numberPatientPerPage, PDO::PARAM_INT);
+        if ($SearchPatientsList != '') {
+            $totalPages->bindValue(':SearchPatientsList', '%' . $SearchPatientsList . '%', PDO::PARAM_STR);
+        }
         $totalPages->execute();
-        return $totalPages->fetch(PDO::FETCH_OBJ);
+        // $toto = $totalPages->fetch(PDO::FETCH_OBJ);
+        // return ceil($toto->numberPages);
+        return ceil($totalPages->fetch(PDO::FETCH_OBJ)->numberPages);
     }
-    public function infoPagePatient($firstPage, $numberResultsPage)
+    public function infoPagePatient($firstPatients, $numberResultsPage, $SearchPatientsList, $patientFilter = ['lastname'])
     {
+        $where = '';
+        if ($SearchPatientsList != '') {
+            $whereArray = [];
+            foreach ($patientFilter as $filter) {
+                $whereArray[] = '`' . $filter . '` LIKE :SearchPatientsList ';
+            }
+            $where = 'WHERE ' . implode(' OR ', $whereArray);
+        }
         $infoPage = $this->pdo->prepare(
             'SELECT `id`, `lastname`, `firstname` 
-            FROM patients
-            ORDER BY `lastname`
+            FROM patients '
+                . $where
+                . 'ORDER BY `lastname`
             LIMIT :numberResultsPage
-            OFFSET :firstPage'           
+            OFFSET :firstPatients'
         );
-        $infoPage->bindValue('numberResultsPage', $numberResultsPage, PDO::PARAM_INT);
-        $infoPage->bindValue('firstPage', $firstPage, PDO::PARAM_INT);
+        $infoPage->bindValue(':numberResultsPage', $numberResultsPage, PDO::PARAM_INT);
+        $infoPage->bindValue(':firstPatients', $firstPatients, PDO::PARAM_INT);
+        if ($SearchPatientsList != '') {
+            $infoPage->bindValue(':SearchPatientsList', '%' . $SearchPatientsList . '%', PDO::PARAM_STR);
+        }
         $infoPage->execute();
         return $infoPage->fetchAll(PDO::FETCH_OBJ);
     }

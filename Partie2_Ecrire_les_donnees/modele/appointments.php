@@ -7,7 +7,7 @@ class Appointments
     public $firstname = '';
     public $dateHour = '';
     public $idPatients = '';
-    private $pdo;
+    private $pdo = null;
 
     // pour faire le lien avec la bdd, on appelle la fonction construct et on y instancie un nouvel objet 
     function __construct()

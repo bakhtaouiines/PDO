@@ -3,14 +3,14 @@
 <div class="container p-3" style="width: auto;">
     <div class="row">
         <div class="col-auto ms-auto mb-3">
-            <a href="../controler/ajout-rendezvous-controler.php" class="btn btn-outline-success btn-lg p-3" role="button"><i class="bi bi-person-plus fs-4 p-2"></i>
+            <a href="../controler/ajout-rendezvous-controler.php" class="btn btn-outline-success p-3" role="button"><i class="bi bi-person-plus fs-5 p-2"></i>
                 Ajouter un rendez-vous</a>
         </div>
     </div>
 
     <table class="table table-hover table-bordered table-responsive bg-light shadow-sm">
-        <thead style="background-color: #2edb98;">
-            <tr class="align-middle">
+        <thead style="background-color: #21a869;">
+            <tr class="align-middle text-white">
                 <th scope="col" class="text-center">
                     <i class="bi bi-person fs-2"></i>
                 </th>

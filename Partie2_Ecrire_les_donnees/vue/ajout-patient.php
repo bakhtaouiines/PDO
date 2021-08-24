@@ -6,60 +6,51 @@
         <div class="row">
             <div class="col-md-6 position-relative">
                 <label for="lastname" class="form-label">Nom de famille</label>
-                <input type="text" class="form-control" id="lastname" name="lastname" required>
-                <div class="valid-tooltip">
-                    Looks good!
-                </div>
-                <div class="invalid-tooltip">
+                <input type="text" class="form-control" id="lastname" name="lastname">
+                <p class="text-danger">
                     <?= isset($errors['lastname']) ? $errors['lastname'] : '' ?>
-                </div>
+                </p>
             </div>
+
             <div class="col-md-6 position-relative">
                 <label for="firstname" class="form-label">Prénom</label>
-                <input type="text" class="form-control" id="firstname" name="firstname" required>
-                <div class="valid-tooltip">
-                    Looks good!
-                </div>
-                <div class="invalid-tooltip">
-                    <p><?= isset($errors['firstname']) ? $errors['firstname'] : '' ?></p>
-                </div>
+                <input type="text" class="form-control" id="firstname" name="firstname" >
+
+                <p class="text-danger">
+                    <?= isset($errors['firstname']) ? $errors['firstname'] : '' ?>
+                </p>
             </div>
 
             <div class="col-md-4 position-relative">
                 <label for="birthdate" class="form-label">Date de naissance</label>
-                <input type="date" class="form-control" id="birthdate" name="birthdate" required>
-                <div class="valid-tooltip">
-                    Looks good!
-                </div>
-                <div class="invalid-tooltip">
-                    <p><?= isset($errors['birthdate']) ? $errors['birthdate'] : '' ?></p>
-                </div>
+                <input type="date" class="form-control" id="birthdate" name="birthdate" >
+
+                <p class="text-danger">
+                    <?= isset($errors['birthdate']) ? $errors['birthdate'] : '' ?>
+                </p>
             </div>
 
             <div class="col-md-3 position-relative">
                 <label for="phone" class="form-label">Téléphone</label>
-                <input type="number" class="form-control" id="phone" name="phone" required>
-                <div class="valid-tooltip">
-                    Looks good!
-                </div>
-                <div class="invalid-tooltip">
-                    <p><?= isset($errors['phone']) ? $errors['phone'] : '' ?></p>
-                </div>
+                <input type="number" class="form-control" id="phone" name="phone" >
+
+                <p class="text-danger">
+                    <?= isset($errors['phone']) ? $errors['phone'] : '' ?>
+                </p>
             </div>
+
             <div class="col-md-5 position-relative">
                 <label for="mail" class="form-label">Adresse Email</label>
                 <div class="input-group has-validation">
                     <span class="input-group-text" id="mailPrepend">@</span>
-                    <input type="text" class="form-control" id="mail" name="mail" aria-describedby="mailPrepend" required>
-                    <div class="valid-tooltip">
-                        Looks good!
-                    </div>
-                    <div class="invalid-tooltip">
-                        <p><?= isset($errors['mail']) ? $errors['mail'] : '' ?></p>
-                    </div>
+                    <input type="text" class="form-control" id="mail" name="mail" aria-describedby="mailPrepend" >
+                    <p class="text-danger">
+                        <?= isset($errors['mail']) ? $errors['mail'] : '' ?>
+                    </p>
                 </div>
             </div>
         </div>
+
         <div class="row d-flex justify-content-center mt-4">
             <div class="col-auto">
                 <button class="btn btn-outline-success p-2" type="submit" name="buttonAddPatient" id="buttonAddPatient" onclick="addPatient()">

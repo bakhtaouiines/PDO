@@ -5,7 +5,7 @@
     <form method="POST" action="" class="row g-3 needs-validation">
         <div class="row text-center">
             <div class="col-md-12 mb-5">
-                <select id="idPatients" name="idPatients" class="form-select" size="5">
+                <select id="idPatients" name="idPatients" class="form-select" size="8">
                     <option value="" selected disabled>
                         Patient:
                     </option>
@@ -19,16 +19,16 @@
                     }
                     ?>
                 </select>
-                <div>
-                    <p class="text-danger"><?= isset($errors['patientId']) ? $errors['patientId'] : '' ?></p>
-                </div>
+                <p class="text-danger">
+                    <?= isset($errors['patientId']) ? $errors['patientId'] : '' ?>
+                </p>
             </div>
 
             <label for="appointmentDate" class="fs-5 fw-lighter mb-3">Sélectionner un jour et un horaire:</label>
             <input type="datetime-local" id="appointmentDateHour" name="appointmentDateHour">
-            <div>
-                <p class="text-danger"><?= isset($errors['appointmentDateHour']) ? $errors['appointmentDateHour'] : '' ?></p>
-            </div>
+            <p class="text-danger">
+                <?= isset($errors['appointmentDateHour']) ? $errors['appointmentDateHour'] : '' ?>
+            </p>
         </div>
 
         <div class="col-12 mt-5 text-center">

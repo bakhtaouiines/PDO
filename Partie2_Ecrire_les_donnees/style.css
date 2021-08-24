@@ -1,6 +1,6 @@
 body {
     font-family: 'Archivo', sans-serif;
-    background-color: rgb(228, 255, 230);
+    background-color: rgb(230, 230, 230);
 }
 
 .homeIcon {
@@ -94,4 +94,32 @@ body {
         bottom: 0;
         opacity: 0;
     }
+}
+
+
+/* changement couleur de la pagination */
+
+.pagination>li>a {
+    background-color: white;
+    color: #5A4181;
+}
+
+.pagination>li>a:focus,
+.pagination>li>a:hover,
+.pagination>li>span:focus,
+.pagination>li>span:hover {
+    color: #2EDB98;
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+.pagination>.active>a {
+    color: white;
+    background-color: #21a869 !Important;
+    border: solid 1px #21a869 !Important;
+}
+
+.pagination>.active>a:hover {
+    background-color: #21a869 !Important;
+    border: solid 1px #21a869;
 }

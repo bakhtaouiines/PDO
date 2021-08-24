@@ -11,47 +11,58 @@
         </div>
 
         <!-- formulaire  de recherche de patient -->
-        <div class="col-md-6 offset-md-3">
+        <div class="col-md-5 offset-md-3">
             <form method="GET" action="">
                 <div class="input-group rounded mb-3">
-                    <input type="search" id="searchPatient" name="searchPatient" class="form-control rounded" placeholder="Rechercher un patient" aria-label="Rechercher un patient">
+                    <input type="search" id="searchPatient" name="searchPatient" class="form-control rounded" placeholder="Rechercher un patient" aria-label="Rechercher un patient" value="<?= ($SearchPatientsList != '') ? $SearchPatientsList :  ''  ?>">
                     <button type="submit" id="submitSearchPatient" name="submitSearchPatient" class="input-group-text border-0 bg-light">
                         <i class="bi bi-search"></i>
                     </button>
                 </div>
+                <!-- filtre de recherche -->
+                <div class="col-auto">
+                    <select id="patientFilter" name="patientFilter[]" class="form-select" multiple>
+                        <option value="" selected disabled>Filtrer:</option>
+                        <option value="lastname">Nom</option>
+                        <option value="firstname">Prénom</option>
+                        <option value="mail">Mail</option>
+                    </select>
+                </div>
             </form>
         </div>
-
-        <!-- pagination -->
-        <div class="col-auto ms-auto">
-            <nav aria-label="navigationPatients">
-                <ul class="pagination">
-                    <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
-                        <a class="page-link" href="?page=<?= $currentPage - 1 ?>" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-
-                    <?php for ($page = 1; $page <= $numberOfPages; $page++) : ?>
-                        <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
-                            <a class="page-link" href="?page=<?= $page ?>"><?= $page ?></a>
+        <?php
+        if ($isCorrectPage) {
+        ?>
+            <!-- pagination -->
+            <div class="col-auto ms-auto">
+                <nav aria-label="navigationPatients">
+                    <ul class="pagination">
+                        <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
+                            <a class="page-link" href="?page=<?= $currentPage - 1 ?><?= ($SearchPatientsList != '') ? '&searchPatient=' . $SearchPatientsList . '&patientFilter%5B%5D=' . $patientFilterString :  ''  ?>" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
                         </li>
-                    <?php endfor ?>
 
-                    <li class="page-item <?= ($currentPage == $numberOfPages) ? "disabled" : "" ?>">
-                        <a class="page-link" href="?page=<?= $currentPage + 1 ?>" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+                        <?php for ($page = 1; $page <= $numberOfPages; $page++) : ?>
+                            <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
+                                <a class="page-link" href="?page=<?= $page ?><?= ($SearchPatientsList != '') ? '&searchPatient=' . $SearchPatientsList . '&patientFilter%5B%5D=' . $patientFilterString : '' ?>"><?= $page ?>
+                                </a>
+                            </li>
+                        <?php endfor ?>
+
+                        <li class="page-item <?= ($currentPage == $numberOfPages) ? "disabled" : "" ?>">
+                            <a class="page-link" href="?page=<?= $currentPage + 1 ?><?= ($SearchPatientsList != '') ? '&searchPatient=' . $SearchPatientsList . '&patientFilter%5B%5D=' . $patientFilterString :  ''  ?>" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
     </div>
-
     <!-- tableau patients -->
-    <table class="table table-hover table-bordered table-responsive bg-light shadow-sm">
-        <thead style="background-color: #2edb98;">
-            <tr class="align-middle ">
+    <table class="table table-hover table-bordered table-responsive bg-light shadow-sm mt-3">
+        <thead style="background-color: #21a869;">
+            <tr class="align-middle text-white">
                 <th scope="col" class="text-center text-uppercase p-4">Nom</th>
                 <th scope="col" class="text-center text-uppercase p-4">Prénom</th>
                 <th scope="col" class="text-center">
@@ -81,6 +92,15 @@
             ?>
         </tbody>
     </table>
+<?php
+        } else { ?>
+    <p>Une erreur est survenue lors de l'obtention de cette page.
+        <a href="../controler/liste-patients-controler.php" class="btn btn-outline-secondary p-2" role="button">Retour à la liste des patients</a>
+    </p>
+
+<?php
+        }
+?>
 </div>
 
 <!-- Modal confirmation suppression patient -->
