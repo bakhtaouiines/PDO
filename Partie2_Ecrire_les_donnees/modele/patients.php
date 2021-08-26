@@ -111,29 +111,42 @@ class Patients
     // fonctions pour la pagination
     // d'abord on détermine le nombre total de patients
 
+
+    /**
+     * Méthode permettant d'avoir le nombre de pages à afficher. Elle a besoin de plusieurs paramètres pour fonctionner.
+     *
+     * @param string $SearchPatientsList = l'input de recherche
+     * @param integer $numberPatientPerPage = nombre de patients par page
+     * @param array $patientFilter = filtre patient (select multiple), 'lastname' indique le filtre par défaut (au cas où rien est sélectionné)
+     * @return int
+     */
     public function totalPagesPatient($SearchPatientsList, $numberPatientPerPage = 5, $patientFilter = ['lastname'])
     {
         $where = '';
         if ($SearchPatientsList != '') {
             $whereArray = [];
             foreach ($patientFilter as $filter) {
+                // ceci va permettre d'avoir par exemple : `lastname` LIKE `:SearchPatientsList`(etc)
                 $whereArray[] = '`' . $filter . '` LIKE :SearchPatientsList ';
             }
+            // implode = transforme le tableau whereArray en chaîne de caractères 
             $where = 'WHERE ' . implode(' OR ', $whereArray);
         }
         $totalPages = $this->pdo->prepare(
             'SELECT COUNT(*) / :numberPatientPerPage
             AS numberPages
         FROM `patients` ' . $where
-        );
+        ); // nombre de pages = nombre de patients divisé par nombre de patients par page
+        // on concatène avec une chaîne vide (s'il n'y a pas de recherches) ou avec ce qui a été recherché ($whereArray)
         $totalPages->bindValue(':numberPatientPerPage', $numberPatientPerPage, PDO::PARAM_INT);
         if ($SearchPatientsList != '') {
             $totalPages->bindValue(':SearchPatientsList', '%' . $SearchPatientsList . '%', PDO::PARAM_STR);
         }
         $totalPages->execute();
+        // Autre méthode :
         // $toto = $totalPages->fetch(PDO::FETCH_OBJ);
         // return ceil($toto->numberPages);
-        return ceil($totalPages->fetch(PDO::FETCH_OBJ)->numberPages);
+        return ceil($totalPages->fetch(PDO::FETCH_OBJ)->numberPages); // ceil = arrondit au supérieur
     }
     public function infoPagePatient($firstPatients, $numberResultsPage, $SearchPatientsList, $patientFilter = ['lastname'])
     {

@@ -42,7 +42,7 @@ $numberOfPages = $Patients->totalPagesPatient($SearchPatientsList, $numberPatien
 $isCorrectPage = true;
 if (!empty($_GET['page'])) {
     if ($_GET['page'] >= 1 && $_GET['page'] <= $numberOfPages) {
-        $currentPage = strip_tags($_GET['page']);
+        $currentPage = htmlspecialchars($_GET['page']);
     } else {
         $isCorrectPage = false;
     }
@@ -50,7 +50,6 @@ if (!empty($_GET['page'])) {
     $currentPage = 1;
 }
 if ($isCorrectPage) {
-
     // Calcul du 1er affichage de la page
     $firstPatients = ($currentPage * $numberPatientPerPage) - $numberPatientPerPage;
     // On récupère les valeurs
