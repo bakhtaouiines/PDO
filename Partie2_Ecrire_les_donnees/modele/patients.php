@@ -2,7 +2,7 @@
 // déclaration de la classe Patients
 class Patients
 {
-    public $id = '';
+    public $id = 0;
     public $lastname = '';
     public $firstname = '';
     public $birthdate = '';
@@ -15,14 +15,24 @@ class Patients
     // pour faire le lien avec la bdd, on appelle la fonction construct et on y instancie un nouvel objet 
     function __construct()
     {
-        try {
-            // On se connecte à MySQL pour faire le lien avec la BDD
-            $this->pdo = new PDO('mysql:host=localhost;dbname=hospitale2n;charset=utf8', 'root', '');
-        } catch (PDOException $Exception) {
-            // En cas d'erreur, on affiche un message et on arrête tout
-            die('Error : ' . $Exception->getMessage());
-        }
+        $this->pdo = DataBase::getPdo();
     }
+
+    public function beginTransaction()
+    {
+        return $this->pdo->beginTransaction();
+    }
+
+    public function commit()
+    {
+        return $this->pdo->commit();
+    }
+
+    public function rollBack()
+    {
+        return $this->pdo->rollBack();
+    }
+
 
     // on ajoute un patient
     public function addPatient()
@@ -84,6 +94,17 @@ class Patients
         $updatePatientInfoQuery->execute();
     }
 
+    // fonction pour vérifier qu'un patient existe
+    public function checkPatientExist()
+    {
+        $query = 'SELECT COUNT(*) AS `isExist` FROM `patients` WHERE `id` = :id';
+        $checkPatientExistRequest = $this->pdo->prepare($query);
+        $checkPatientExistRequest->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $checkPatientExistRequest->execute();
+        $result = $checkPatientExistRequest->fetch(PDO::FETCH_OBJ); // result = objet
+        return $result->isExist;
+    }
+
     // fonction pour supprimer un patient 
     public function deletePatient()
     {
@@ -93,6 +114,7 @@ class Patients
         );
         $deletePatientQuery->bindValue(':id', $this->id, PDO::PARAM_INT);
         $deletePatientQuery->execute();
+        return !$this->checkPatientExist(); // Le point d'exclamation devant $this renvoie un false
     }
 
     // fonction pour rechercher un patient

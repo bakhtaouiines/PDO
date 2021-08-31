@@ -1,17 +1,9 @@
 <?php include('header.php'); ?>
 
-<div class="container p-3" style="width:auto;">
-    <!-- bouton redirige vers formulaire ajout patient -->
-    <div class="row p-2">
-        <div class="col-md-6 offset-md-12">
-            <a href="../controler/ajout-patient-controler.php" class="btn btn-outline-success p-2" role="button">
-                <i class="bi bi-person-plus fs-5 p-2"></i>
-                Ajouter un patient
-            </a>
-        </div>
-
-        <!-- formulaire  de recherche de patient -->
-        <div class="col-md-5 offset-md-3">
+<div class="container p-3">
+    <!-- formulaire  de recherche de patient -->
+    <div class="row justify-content-end my-2">
+        <div class="col-md-4 offset-md-9">
             <form method="GET" action="">
                 <div class="input-group rounded mb-3">
                     <input type="search" id="searchPatient" name="searchPatient" class="form-control rounded" placeholder="Rechercher un patient" aria-label="Rechercher un patient" value="<?= ($SearchPatientsList != '') ? $SearchPatientsList :  ''  ?>">
@@ -19,10 +11,11 @@
                         <i class="bi bi-search"></i>
                     </button>
                 </div>
+
                 <!-- filtre de recherche -->
-                <div class="col-auto">
+                <div class="col-md-6 offset-md-6">
                     <select id="patientFilter" name="patientFilter[]" class="form-select" multiple>
-                        <option value="" selected disabled>Filtrer:</option>
+                        <option value="" selected disabled>Filtrer la recherche par:</option>
                         <option value="lastname">Nom</option>
                         <option value="firstname">Prénom</option>
                         <option value="mail">Mail</option>
@@ -30,11 +23,22 @@
                 </div>
             </form>
         </div>
+    </div>
+
+    <!-- bouton redirige vers formulaire ajout patient -->
+    <div class="row my-2">
+        <div class="col-md-4">
+            <a href="../controler/ajout-patient-controler.php" class="btn btn-outline-success p-2" role="button">
+                <i class="bi bi-person-plus fs-5 p-2"></i>
+                Ajouter un patient
+            </a>
+        </div>
+
         <?php
         if ($isCorrectPage) {
         ?>
             <!-- pagination -->
-            <div class="col-auto ms-auto">
+            <div class="col-md-3 offset-md-9">
                 <nav aria-label="navigationPatients">
                     <ul class="pagination">
                         <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
@@ -59,6 +63,9 @@
                 </nav>
             </div>
     </div>
+
+
+
     <!-- tableau patients -->
     <table class="table table-hover table-bordered table-responsive bg-light shadow-sm mt-3">
         <thead style="background-color: #21a869;">
@@ -101,8 +108,8 @@
 <?php
         }
 ?>
-</div>
 
+</div>
 <!-- Modal confirmation suppression patient -->
 <div class="modal fade" id="deletePatientModal" tabindex="-1" aria-labelledby="deletePatientModal" aria-hidden="true">
     <div class="modal-dialog">

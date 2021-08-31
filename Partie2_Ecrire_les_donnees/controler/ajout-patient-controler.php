@@ -1,6 +1,8 @@
 <?php
 // On charge le fichier du modèle.
 require('../modele/patients.php');
+require('../modele/dataBase.php');
+require('../modele/appointments.php');
 $newPatient = new Patients;
 
 // initialisation d'un tableau qui va contenir les erreurs

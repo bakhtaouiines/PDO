@@ -2,25 +2,18 @@
 // déclaration de la classe Appointments
 class Appointments
 {
-    public $id = '';
+    public $id = 0;
     public $lastname = '';
     public $firstname = '';
     public $dateHour = '';
     public $idPatients = '';
     private $pdo = null;
 
-    // pour faire le lien avec la bdd, on appelle la fonction construct et on y instancie un nouvel objet 
-    function __construct()
-    {
-        try {
-            // On se connecte à MySQL pour faire le lien avec la BDD
-            $this->pdo = new PDO('mysql:host=localhost;dbname=hospitale2n;charset=utf8', 'root', '');
-        } catch (PDOException $Exception) {
-            // En cas d'erreur, on affiche un message et on arrête tout
-            die('Error : ' . $Exception->getMessage());
-        }
-    }
+    public function __construct() {
+        $this->pdo = DataBase::getPdo();
 
+    }
+  
     // on récupère les informations d'un patient
     public function getPatientById()
     {

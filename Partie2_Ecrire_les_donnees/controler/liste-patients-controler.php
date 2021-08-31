@@ -2,18 +2,28 @@
 // On charge le fichier du modèle.
 require('../modele/patients.php');
 require('../modele/appointments.php');
+require('../modele/dataBase.php');
 $Patients = new Patients;
+$DeletePatient = new Appointments;
 
 /**
  * Suppression patient + RDV
  */
 if (isset($_POST['delete_idPatients'])) {
-    $DeletePatient = new Appointments;
     $DeletePatient->idPatients = htmlspecialchars($_POST['delete_idPatients']);
-    $DeletePatientFromList = $DeletePatient->deleteAppointmentPatient();
     $Patients->id = htmlspecialchars($_POST['delete_idPatients']);
-    $Patients->deletePatient();
-    $PatientsList = $Patients->getPatientsList();
+    $DeletePatientFromList = $DeletePatient->deleteAppointmentPatient();
+    if ($Patients->checkPatientExist()) {
+        try {
+            $Patients->beginTransaction();
+            $DeletePatient->deleteAppointmentPatient();
+            $Patients->deletePatient();
+            $PatientsList = $Patients->getPatientsList();
+            $Patients->commit();
+        } catch (PDOException $e) {
+            $Patients->rollBack();
+        }
+    }
 }
 
 /**

@@ -1,5 +1,6 @@
 <?php
 require('../modele/appointments.php');
+require('../modele/dataBase.php');
 
 $Appointments = new Appointments;
 $AppointmentsList = $Appointments->getAppointmentsList();

@@ -2,6 +2,7 @@
 // On charge le fichier du modèle.
 require('../modele/appointments.php');
 require('../modele/patients.php');
+require('../modele/dataBase.php');
 
 // on instancie un nouvel objet Appointment pour modifier ultérieurement les infos d'un rdv
 $AppointmentInfo = new Appointments;

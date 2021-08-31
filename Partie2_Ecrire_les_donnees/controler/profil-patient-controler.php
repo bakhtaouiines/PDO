@@ -2,6 +2,7 @@
 // On charge le fichier du modèle.
 require('../modele/patients.php');
 require('../modele/appointments.php');
+require('../modele/dataBase.php');
 
 /////////////// affichage du patient sélectionné //////////////////
 

@@ -1,6 +1,8 @@
 <?php
 // On charge le fichier du modèle.
+require('../modele/dataBase.php');
 require('../modele/appointments.php');
+require('../modele/patients.php');
 
 // instance d'un nouvel objet pour appeler les info du clients
 $PatientId = new Appointments;
@@ -32,6 +34,5 @@ if (isset($_POST['buttonAddAppointment'])) {
         $NewAppointment->addAppointment();
     }
 }
-
 
 require('../vue/ajout-rendezvous.php');
